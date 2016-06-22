@@ -150,10 +150,6 @@ if MODE.lower() == 'create' or MODE.lower() == 'update':
         genomebiosample.BioSampleTable(dbName, ORGANISM, EMAIL)
 
 
-    #---------------------------Bioproject Table------------------------#
-    if modify_bioproject.lower() == 'y':
-        genomebioproject.BioProjectTable(dbName, ORGANISM, EMAIL)
-
     #-----------------------Nucleotide User Input----------------------#
     modify_nucleotide = raw_input('\n\
     Do you want to create/update the nucleotide table and download genomes? (Y/N)')
