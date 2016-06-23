@@ -152,7 +152,7 @@ if MODE.lower() == 'create' or MODE.lower() == 'update':
 
     #-----------------------Nucleotide User Input----------------------#
     modify_nucleotide = raw_input('\n\
-    Do you want to create/update the nucleotide table and download genomes? (Y/N)')
+    Do you want to create/update the Nucleotide table and download genomes? (Y/N)')
     while modify_nucleotide.lower() != 'y' and modify_nucleotide.lower() != 'n':
         print ("\tInvalid input, must be either 'Y','y','N', or 'n'.")
         modify_nucleotide = raw_input('\n\
