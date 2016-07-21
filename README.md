@@ -1,4 +1,4 @@
 # GenomeCollector
-Creates an SQLite database and downloads genomes from NCBI.
+Creates an SQLite database of genome metadata and downloads assemblies from NCBI.
 
 Development Status - Version 1.1
