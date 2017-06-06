@@ -116,6 +116,10 @@ def AssemblyTable(dbName, ORGANISM, EMAIL):
            ID_handle = Entrez.esummary(db="assembly",id=ID)                        # Retrieve Assembly record using ID
            ID_record = Entrez.read(ID_handle, validate=False)                      # Read Assembly record
            record_dict = ID_record['DocumentSummarySet']['DocumentSummary'][0]     # Store Assembly information as dictionary
+
+           #tmp_file = open("tmp_record_dict.txt",'w')
+           #for key in record_dict:
+           #    tmp_file.write(key + "\n")
            entrez_string_element = type(record_dict['Taxid'])                      # Get type of Bio String object (used in type checking)
 
 
@@ -129,7 +133,7 @@ def AssemblyTable(dbName, ORGANISM, EMAIL):
            coverage = float(record_dict['Coverage'])                               # Average coverage of assembly
            sub_date = record_dict['SubmissionDate']                                # Submission date
            seq_rel_date = record_dict['SeqReleaseDate']                            # Sequence release date
-           asm_rel_date= record_dict['AsmReleaseDate']                             # Assembly release date
+           asm_rel_date= record_dict['SubmissionDate']                             # Assembly release date
            wgs_proj = record_dict['WGS']                                           # Whole genome sequence project accession
            meta_string = record_dict['Meta']                                       # Metadata as entered by submitter
 
