@@ -130,8 +130,8 @@ def BioSampleTable(dbName, ORGANISM, EMAIL):
             ID = record['IdList'][0]
 
             #-------------------------Bioproject Record--------------------#
-            ID_handle = Entrez.esummary(db="biosample",id=ID)                 # Search for biorproject entry using ID
-            ID_record = Entrez.read(ID_handle)                                 # Read in the search results
+            ID_handle = Entrez.esummary(db="biosample",id=ID)                                   # Search for biorproject entry using ID
+            ID_record = Entrez.read(ID_handle, validate = False)                                 # Read in the search results
             record_dict = ID_record['DocumentSummarySet']['DocumentSummary'][0]                                        # Store metadata as dictionary
 
 
