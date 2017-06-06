@@ -117,9 +117,8 @@ def AssemblyTable(dbName, ORGANISM, EMAIL):
            ID_record = Entrez.read(ID_handle, validate=False)                      # Read Assembly record
            record_dict = ID_record['DocumentSummarySet']['DocumentSummary'][0]     # Store Assembly information as dictionary
 
-           #tmp_file = open("tmp_record_dict.txt",'w')
-           #for key in record_dict:
-           #    tmp_file.write(key + "\n")
+
+           tmp_file = open("assembly_record_dict.txt",'w')
            entrez_string_element = type(record_dict['Taxid'])                      # Get type of Bio String object (used in type checking)
 
 

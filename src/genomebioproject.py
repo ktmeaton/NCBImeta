@@ -125,7 +125,6 @@ def BioProjectTable(dbName, ORGANISM, EMAIL):
             record_dict = ID_record['DocumentSummarySet']['DocumentSummary'][0]                                        # Store metadata as dictionary
 
 
-
             # -----------------------Bioproject attributes-----------------#
             accession = record_dict['Project_Acc']
             status = record_dict['Sequencing_Status']

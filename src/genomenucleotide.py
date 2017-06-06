@@ -168,8 +168,6 @@ def NucleotideTable(dbName, ORGANISM, EMAIL):
                 ID_accession = record_dict['Caption']                              # Retrieve the nucleotide accession number
 
 
-
-
                 # ------------------Check if record exists-------------------#
                 cur.execute('''SELECT EXISTS(
                                 SELECT accession

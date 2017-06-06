@@ -134,7 +134,6 @@ def BioSampleTable(dbName, ORGANISM, EMAIL):
             ID_record = Entrez.read(ID_handle, validate = False)                                 # Read in the search results
             record_dict = ID_record['DocumentSummarySet']['DocumentSummary'][0]                                        # Store metadata as dictionary
 
-
             # -----------------------BioSample attributes-----------------------#
             accession = record_dict['Accession']
             organism = record_dict['Organism']
