@@ -8,6 +8,7 @@ NCBI Genome Database Annotator
 
 import argparse 
 import sqlite3
+import datetime 
 import os
 
 from genomeerrors import *
@@ -162,7 +163,12 @@ for element in annot_dict:
                  year,
                  element_biosample,))
 
-   
+    #------------------------WWrite to Logfile-------------------------#
+    now = datetime.datetime.now()                                           # Get timestamp
+    annotate_log_file.write("[" + str(now) + "]" +
+                 "\t" + "Accession number meta data modified:" +
+                 "\t" + element + "." + "\n")                               # Write to logfile
+    #conn.commit()                                                           # Commit assembly record changes to database
                 
  
 
