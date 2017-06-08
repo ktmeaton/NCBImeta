@@ -204,4 +204,6 @@ def check_accessory_dir():
         os.makedirs("database")
     if not os.path.exists("genomes"):                                              # Check if log directory exists
         os.makedirs("genomes")
+    if not os.path.exists("annotate"):                                              # Check if log directory exists
+        os.makedirs("annotate")        
     return 0                                

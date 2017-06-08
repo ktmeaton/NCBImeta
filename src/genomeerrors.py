@@ -27,4 +27,16 @@ class ErrorDBNotExists(Exception):
         print("User entered: --database" + repr(self.value))
 
 
+class ErrorAnnotFileNotExists(Exception):
+    def __init__(self, value):
+        self.value = value
+    def __str__(self):
+        print("\n\nFile does not exist.")
+        print("User entered: --annotfile" + repr(self.value))
 
+class ErrorAccessionNotInDB(Exception):
+    def __init__(self, value):
+        self.value = value
+    def __str__(self):
+        print("\n\nFThe accession number does not exist in the database.")
+        print("Unknown accession number found: " + repr(self.value))

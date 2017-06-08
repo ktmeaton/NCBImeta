@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sat Jan 30 14:09:59 2016
+Edited: June 6, 2017 - post-GI number removal check
 
 @author: Katherine Eaton
 
@@ -27,7 +28,7 @@ genomeutilities.check_accessory_dir()                                           
 
 parser = argparse.ArgumentParser(description='Description of the Genome Collector.',
                                  add_help=True,
-                                 version = 'GenomeCollector 1.0')
+                                 version = 'GenomeCollector 2.0')
 
 mandatory = parser.add_argument_group('mandatory')
 create_update = parser.add_argument_group('create/update')
