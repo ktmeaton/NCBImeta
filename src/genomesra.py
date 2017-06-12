@@ -66,8 +66,13 @@ def SRATable(dbName, ORGANISM, EMAIL, output_dir):
                                            library_source TEXT,
                                            library_selection TEXT,
                                            name TEXT,
-                                           title TEXT
-                                           )''')
+                                           title TEXT,
+                                           sra_bioproject TEXT,
+                                           sra_biosample TEXT,
+                                           total_runs TEXT,
+                                           experiment_acc TEXT,
+                                           organism_taxid TEXT,
+                                           instrument TEXT)''')
 
     cur.execute('''
     SELECT accession FROM BioProject''')
@@ -141,7 +146,7 @@ def SRATable(dbName, ORGANISM, EMAIL, output_dir):
 
             # Misc
             ext_links = sra_metadata["ExtLinks"]             
-            exp_xml = sra_metadata["ExpXml"]            
+            exp_xml = sra_metadata["ExpXml"]
             item = sra_metadata["Item"]          
             sra_ID = sra_metadata["Id"]
             
@@ -153,13 +158,19 @@ def SRATable(dbName, ORGANISM, EMAIL, output_dir):
             run_total_bases = run_info_dict["total_bases"]
             run_total_spots = run_info_dict["total_spots"]
 
+            # Meta
             scientific_name = sra_xml_parse(exp_xml, "ScientificName")
             library_layout = sra_xml_parse(exp_xml, "LIBRARY_LAYOUT")
             library_source = sra_xml_parse(exp_xml, "LIBRARY_SOURCE")
             library_selection = sra_xml_parse(exp_xml, "LIBRARY_SELECTION")
             name = sra_xml_parse(exp_xml, " name")
             title = sra_xml_parse(exp_xml, "Title")
-
+            sra_bioproject = sra_xml_parse(exp_xml, "Bioproject")
+            sra_biosample = sra_xml_parse(exp_xml, "Biosample")
+            total_runs = sra_xml_parse(exp_xml, "total_runs")
+            experiment_acc = sra_xml_parse(exp_xml, "Experiment_acc")
+            organism_taxid = sra_xml_parse(exp_xml, "Organism_taxid")
+            instrument = sra_xml_parse(exp_xml, "instrument_model")
 
             # --------------------------Update Database--------------------------#
             print ("Writing: " + run_accession + " to the database.\n")
@@ -178,11 +189,19 @@ def SRATable(dbName, ORGANISM, EMAIL, output_dir):
                                        library_source,
                                        library_selection,
                                        name,
-                                       title)
+                                       title,
+                                       sra_bioproject,
+                                       sra_biosample,
+                                       total_runs,
+                                       experiment_acc,
+                                       organism_taxid,
+                                       instrument)
                                   VALUES
                                   (?, ?, ?, ?, ?,
                                    ?, ?, ?, ?, ?,
-                                   ?, ?, ?, ?, ?)''',
+                                   ?, ?, ?, ?, ?,
+                                   ?, ?, ?, ?, ?,
+                                   ?)''',
                              (ID,
                                        bioproject_accession,
                                        run_accession,
@@ -197,16 +216,21 @@ def SRATable(dbName, ORGANISM, EMAIL, output_dir):
                                        library_source,
                                        library_selection,
                                        name,
-                                       title))
+                                       title,
+                                       sra_bioproject,
+                                       sra_biosample,
+                                       total_runs,
+                                       experiment_acc,
+                                       organism_taxid,
+                                       instrument))
             
 
-    # Write to logfile
-    now = datetime.datetime.now()
-    sra_log_file.write("[" + str(now) + "]" +
-                 "\t" + "New bioproject accession files added:" +
-                 "\t" + bioproject_accession + "." + "\n")
-    conn.commit()
-            
+        # Write to logfile
+        now = datetime.datetime.now()
+        sra_log_file.write("[" + str(now) + "]" +
+                     "\t" + "New bioproject accession files added:" +
+                     "\t" + bioproject_accession + "." + "\n")
+        conn.commit()
 
                 
     #----------------------------------------------------------------------#
@@ -215,6 +239,5 @@ def SRATable(dbName, ORGANISM, EMAIL, output_dir):
     conn.commit()                                                      # Make sure all changes are committed to database
     cur.close()                                                        # Close the database
     sra_log_file.close()                                                   # Close the logfile
-
 
 

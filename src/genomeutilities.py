@@ -122,12 +122,14 @@ def sampledata_retrieve(sampledata_string, retrieve_type):
 
 def sra_xml_parse(xml_string, keyword):
     ''' '''
+    #print(xml_string)
+    xml_string = xml_string.replace("Experiment acc", "Experiment_acc")
+    xml_string = xml_string.replace("Organism taxid", "Organism_taxid")
     tmp = xml_string[xml_string.find(keyword)+len(keyword)+1:]  # Search for keyword, remove keyword header
-    
+
     if(tmp[0] == "\""):
         tmp = tmp[tmp.find("\"")+1:]
-        start = tmp[:tmp.find(">")]
-        retrieve_string = start[:start.find("<")-1]
+        retrieve_string = tmp[:tmp.find("\"")]
     
     elif(tmp[0:2] == " <"):
         tmp = tmp[tmp.find("<")+1:]

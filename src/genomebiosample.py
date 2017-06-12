@@ -33,7 +33,7 @@ def BioSampleTable(dbName, ORGANISM, EMAIL, output_dir):
 
     log_path = output_dir + OS_SEP + "log"
     
-    str_biosample_log_file = "log" + OS_SEP + ORGANISM.replace(" ", "_") + "_db_biosample.log"
+    str_biosample_log_file = log_path + OS_SEP + ORGANISM.replace(" ", "_") + "_db_biosample.log"
 
     if os.path.exists(str_biosample_log_file):
         biosample_log_file = open(str_biosample_log_file, "a")                # Open logfile for appending
