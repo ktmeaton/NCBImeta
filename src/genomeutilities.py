@@ -118,6 +118,27 @@ def sampledata_retrieve(sampledata_string, retrieve_type):
     retrieve_string = start[:start.find("<")]
     return retrieve_string
 
+
+
+def sra_xml_parse(xml_string, keyword):
+    ''' '''
+    tmp = xml_string[xml_string.find(keyword)+len(keyword)+1:]  # Search for keyword, remove keyword header
+    
+    if(tmp[0] == "\""):
+        tmp = tmp[tmp.find("\"")+1:]
+        start = tmp[:tmp.find(">")]
+        retrieve_string = start[:start.find("<")-1]
+    
+    elif(tmp[0:2] == " <"):
+        tmp = tmp[tmp.find("<")+1:]
+        start = tmp[:tmp.find(">")]
+        retrieve_string = start[:start.find("<")]        
+
+    else:    
+        start = tmp[:tmp.find(">")-2]
+        retrieve_string = start[:start.find("<")]          
+    return retrieve_string    
+
 def sampledata_print(sampledata_string):
     ''' '''
     strain = sampledata_retrieve(sampledata_string, "strain")
@@ -181,6 +202,16 @@ def retrieve_bioproject_gb(gb_handle):
        item_index += 1
 
    return ''
+
+def parseSRARunInfo(run_info):
+    ''' '''
+    run_info_dict = {}
+    list_run_info = run_info.replace("Run acc", "Run_acc").strip("<>/").split(" ")
+    for element in list_run_info:
+        key = element.split("=")[0]
+        item = element.split("=")[1]
+        run_info_dict[key] = item
+    return(run_info_dict)
 
 def os_check():
     ''' Return OS Separator'''

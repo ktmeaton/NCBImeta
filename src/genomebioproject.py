@@ -14,6 +14,7 @@ import os
 
 from Bio import Entrez                                                         # Entrez NCBI API from biopython
 from genomeutilities import metadata_count, os_check
+from genomesra import SRATable
 
 def BioProjectTable(dbName, ORGANISM, EMAIL):
     ''' '''
@@ -38,7 +39,7 @@ def BioProjectTable(dbName, ORGANISM, EMAIL):
         bioproject_log_file = open(str_bioproject_log_file, "a")               # Open logfile for appending
     else:
         bioproject_log_file = open(str_bioproject_log_file, "w")               # Open logfile for writing
-
+        
 
     #-----------------------------------------------------------------------#
     #                                SQL Setup                              #
@@ -148,6 +149,20 @@ def BioProjectTable(dbName, ORGANISM, EMAIL):
             organization = record_dict['Submitter_Organization']
             reg_date = record_dict['Registration_Date']
 
+
+            # ---------------------Get Bioproject ID-----------------------#
+            search_term = ORGANISM + "[Orgn] AND " + accession  + "[Bioproject]"
+            handle = Entrez.esearch(db="sra",
+                        term=search_term,
+                        retmax = 1)
+            record = Entrez.read(handle)
+            ID = record['IdList'][0]
+            
+            #-------------------------Bioproject Record--------------------#
+            ID_handle = Entrez.esummary(db="sra",id=ID)                 # Search for biorproject entry using ID
+            ID_record = Entrez.read(ID_handle)                                 # Read in the search results
+
+    
 
             # --------------------------Update Database--------------------------#
             print ("Writing: " + accession + " to the database.\n")
