@@ -16,12 +16,13 @@ from Bio import Entrez                                                      # En
 from genomeutilities import metadata_count, os_check, parseSRARunInfo, sra_xml_parse
 
 
-def SRATable(dbNameSRA, dbNameBioproject, ORGANISM, EMAIL):
+def SRATable(dbName, ORGANISM, EMAIL, output_dir):
     ''' '''
     print("\nCreating/Updating the SRA table using the following parameters: ")
-    print("\t" + dbNameSRA)
-    print("\t" + ORGANISM)
-    print("\t" + EMAIL +"\n\n")
+    print("Database: " + "\t" + dbName)
+    print("Organism: " + "\t" + ORGANISM)
+    print("Email: " + "\t" + EMAIL)
+    print("Output Directory: " + "\t" + output_dir + "\n\n")
 
     Entrez.email = EMAIL
 
@@ -32,10 +33,9 @@ def SRATable(dbNameSRA, dbNameBioproject, ORGANISM, EMAIL):
     #                                File Setup                             #
     #-----------------------------------------------------------------------#
 
-    if not os.path.exists("log"):                                           # Check if log directory exists
-        os.makedirs("log")
+    log_path = output_dir + OS_SEP + "log"
 
-    str_sra_log_file = "log" + OS_SEP + ORGANISM.replace(" ", "_") + "_db_sra.log"
+    str_sra_log_file = log_path + OS_SEP + ORGANISM.replace(" ", "_") + "_db_sra.log"
 
     if os.path.exists(str_sra_log_file):
         sra_log_file = open(str_sra_log_file, "a")                          # Open logfile for appending
@@ -46,14 +46,12 @@ def SRATable(dbNameSRA, dbNameBioproject, ORGANISM, EMAIL):
     #                                SQL Setup                              #
     #-----------------------------------------------------------------------#
 
-    sra_conn = sqlite3.connect(dbNameSRA)                                   # Connect to the DB
-    sra_cur = sra_conn.cursor()                                             # Create cursor for commands
+    conn = sqlite3.connect(dbName)                                   # Connect to the DB
+    cur = conn.cursor()                                                 # Create cursor for commands
 
-    bioproject_conn = sqlite3.connect(dbNameBioproject)                     # Connect to the DB
-    bioproject_cur = bioproject_conn.cursor()                               # Create cursor for commands      
 
     #---------------------------SRA Table-----------------------------------#
-    sra_cur.execute('''
+    cur.execute('''
     Create TABLE IF NOT EXISTS SRA (bioproject_id TEXT,
                                            bioproject_accession TEXT,
                                            run_accession TEXT,
@@ -71,9 +69,9 @@ def SRATable(dbNameSRA, dbNameBioproject, ORGANISM, EMAIL):
                                            title TEXT
                                            )''')
 
-    bioproject_cur.execute('''
+    cur.execute('''
     SELECT accession FROM BioProject''')
-    bioproject_list = bioproject_cur.fetchall()
+    bioproject_list = cur.fetchall()
 
     num_bioproject = len(bioproject_list)                                   # Number of bioprojects to process
     num_bioproject_processed = 0                                            # Counter for the number of bioprojects processed
@@ -94,13 +92,13 @@ def SRATable(dbNameSRA, dbNameBioproject, ORGANISM, EMAIL):
                 str(num_bioproject))                                        # Print record progress to screen
         
         # ---------------------Check if record exists-----------------------#
-        sra_cur.execute('''
+        cur.execute('''
         SELECT EXISTS(SELECT bioproject_accession
                             FROM SRA
                             WHERE bioproject_accession=?)''',
                             (bioproject_accession,))                        # Check if sra record is already in SRA Table
 
-        record_exists = sra_cur.fetchone()[0]                               # 0 if not found, 1 if found
+        record_exists = cur.fetchone()[0]                               # 0 if not found, 1 if found
 
         if record_exists:
             continue                                                        # If bioproject has been fully processed, skip
@@ -165,7 +163,7 @@ def SRATable(dbNameSRA, dbNameBioproject, ORGANISM, EMAIL):
 
             # --------------------------Update Database--------------------------#
             print ("Writing: " + run_accession + " to the database.\n")
-            sra_cur.execute('''
+            cur.execute('''
             INSERT INTO SRA (bioproject_id,
                                        bioproject_accession,
                                        run_accession,
@@ -207,18 +205,16 @@ def SRATable(dbNameSRA, dbNameBioproject, ORGANISM, EMAIL):
     sra_log_file.write("[" + str(now) + "]" +
                  "\t" + "New bioproject accession files added:" +
                  "\t" + bioproject_accession + "." + "\n")
-    sra_conn.commit()
+    conn.commit()
             
 
                 
     #----------------------------------------------------------------------#
     #                                    Cleanup                           #
     #----------------------------------------------------------------------#
-    sra_conn.commit()                                                              # Make sure all changes are committed to database
-    sra_cur.close()                                                                # Close the database
-    bioproject_cur.close()                                                                # Close the database    
-    sra_log_file.close()                                                # Close the logfile
+    conn.commit()                                                      # Make sure all changes are committed to database
+    cur.close()                                                        # Close the database
+    sra_log_file.close()                                                   # Close the logfile
 
-    
-SRATable("database\Yersinia_test_sra.sqlite", "database\Yersinia_pestis_db-Copy.sqlite", "Yersinia pestis", "ktmeaton@gmail.com")
+
 

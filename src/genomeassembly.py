@@ -13,39 +13,40 @@ from Bio import Entrez                                                         #
 from genomeutilities import metadata_count, os_check
 
 
-def AssemblyTable(dbName, ORGANISM, EMAIL):
+def AssemblyTable(dbName, ORGANISM, EMAIL, output_dir):
     ''' '''
     print("\nCreating/Updating the Assembly table using the following parameters: ")
-    print("\t" + dbName)
-    print("\t" + ORGANISM)
-    print("\t" + EMAIL +"\n\n")
+    print("Database: " + "\t" + dbName)
+    print("Organism: " + "\t" + ORGANISM)
+    print("Email: " + "\t" + EMAIL)
+    print("Output Directory: " + "\t" + output_dir + "\n\n")
 
     Entrez.email = EMAIL
 
-    OS_SEP = os_check()                                                        # Retrieve the directory separator by OS
+    OS_SEP = os_check()                                                         # Retrieve the directory separator by OS
 
-    #-----------------------------------------------------------------------#
-    #                                File Setup                             #
-    #-----------------------------------------------------------------------#
-    if not os.path.exists("log"):                                              # Check if log directory exists
-        os.makedirs("log")
+    #---------------------------------------------------------------------------#
+    #                                File Setup                                 #
+    #---------------------------------------------------------------------------#
 
-    str_assembly_log_file = "log" + OS_SEP + ORGANISM.replace(" ", "_") + "_db_assembly.log"
+    log_path = output_dir + OS_SEP + "log"
+    
+    str_assembly_log_file = output_dir + OS_SEP + "log" + OS_SEP + ORGANISM.replace(" ", "_") + "_db_assembly.log"
 
     if os.path.exists(str_assembly_log_file):
         assembly_log_file = open(str_assembly_log_file, "a")                   # Open logfile for appending
     else:
         assembly_log_file = open(str_assembly_log_file, "w")                   # Open logfile for writing
-    #-----------------------------------------------------------------------#
-    #                                SQL Setup                              #
-    #-----------------------------------------------------------------------#
+    #--------------------------------------------------------------------------#
+    #                                SQL Setup                                 #
+    #--------------------------------------------------------------------------#
 
     conn = sqlite3.connect(dbName)                                             # Connect to the DB
     cur = conn.cursor()                                                        # Create cursor for commands
 
-    #-----------------------------------------------------------------------#
-    #                             Assembly Table                            #
-    #-----------------------------------------------------------------------#
+    #--------------------------------------------------------------------------#
+    #                             Assembly Table                               #
+    #--------------------------------------------------------------------------#
     cur.execute('''
     Create TABLE IF NOT EXISTS Assembly (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
                                          assembly_id TEXT,

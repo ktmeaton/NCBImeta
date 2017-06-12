@@ -2,7 +2,7 @@
 """
 Created on Thu Jan 21 22:10:08 2016
 
-@author: harle
+@author: Katherine Eaton
 """
 
 import os
@@ -224,17 +224,19 @@ def os_check():
     else:
         return "/"
 
-def check_accessory_dir():
-    if not os.path.exists("log"):                                              # Check if log directory exists
-        os.makedirs("log")
-    if not os.path.exists("docs"):                                              # Check if log directory exists
-        os.makedirs("docs")
-    if not os.path.exists("data"):                                              # Check if log directory exists
-        os.makedirs("data")
-    if not os.path.exists("database"):                                              # Check if log directory exists
-        os.makedirs("database")
-    if not os.path.exists("genomes"):                                              # Check if log directory exists
-        os.makedirs("genomes")
-    if not os.path.exists("annotate"):                                              # Check if log directory exists
-        os.makedirs("annotate")        
+def check_accessory_dir(output_dir):
+    OS_SEP = os_check()
+    output_dir = output_dir + OS_SEP
+    if not os.path.exists(output_dir + OS_SEP + "log"):                                              # Check if log directory exists
+        os.makedirs(output_dir + OS_SEP + "log")
+    if not os.path.exists(output_dir + OS_SEP + "docs"):                                              # Check if log directory exists
+        os.makedirs(output_dir + OS_SEP + "docs")
+    if not os.path.exists(output_dir + OS_SEP + "data"):                                              # Check if log directory exists
+        os.makedirs(output_dir + OS_SEP + "data")
+    if not os.path.exists(output_dir + OS_SEP + "database"):                                              # Check if log directory exists
+        os.makedirs(output_dir + OS_SEP + "database")
+    if not os.path.exists(output_dir + OS_SEP + "genomes"):                                              # Check if log directory exists
+        os.makedirs(output_dir + OS_SEP + "genomes")
+    if not os.path.exists(output_dir + OS_SEP + "annotate"):                                              # Check if log directory exists
+        os.makedirs(output_dir + OS_SEP + "annotate")        
     return 0                                

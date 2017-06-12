@@ -8,7 +8,7 @@ Edited: June 6, 2017 - post-GI number removal check
 "Genome Collector Module"
 """
 
-import argparse                                                                # Command-line argument parsing
+import argparse                                                         # Command-line argument parsing
 import sqlite3
 import os
 
@@ -18,13 +18,14 @@ import genomeutilities
 import genomebioproject
 import genomebiosample
 import genomenucleotide
+import genomesra
 
 
 #-----------------------------------------------------------------------#
 #                            Argument Parsing                           #
 #-----------------------------------------------------------------------#
 
-genomeutilities.check_accessory_dir()                                                           # Create accessory directories
+OS_SEP = genomeutilities.os_check()                                             # Retrieve the directory separator by OS
 
 parser = argparse.ArgumentParser(description='Description of the Genome Collector.',
                                  add_help=True,
@@ -46,8 +47,16 @@ mandatory.add_argument('--database',
                     help='Genome Database Name',
                     type = str,
                     action = 'store',
-                    dest = 'dbname',
+                    dest = 'db_name',
                     required=True)
+
+mandatory.add_argument('--outputdir',
+                    help='Output Directory',
+                    type = str,
+                    action = 'store',
+                    dest = 'output_dir',
+                    required=True)
+
 
 bonus.add_argument('--assembly-status',
                    help='Filter by Assembly Status: Complete, Chromosome, Scaffold, or Contig',
@@ -59,51 +68,56 @@ bonus.add_argument('--assembly-status',
 args = vars(parser.parse_args())
 
 
-MODE = args['mode']
-dbName = args['dbname'] + ".sqlite"
-ASSEMBLY_STATUS = args['assembly_status']
+mode = args['mode']
+db_name = args['db_name'] + ".sqlite"
+output_dir = args['output_dir']
+assembly_status = args['assembly_status']
 
 
-#-----------------------------------------------------------------------#
-#                           Argument Checking                           #
-#-----------------------------------------------------------------------#
+#-------------------------------------------------------------------------------#
+#                           Argument Checking                                   #
+#-------------------------------------------------------------------------------#
 
+genomeutilities.check_accessory_dir(output_dir)                                 # Create accessory directories
 
-#---------------------------Delete Database-----------------------------#
-if MODE.lower() == 'delete':                                                   # Delete mode check
-    if os.path.exists(dbName):                                                 # Make sure database exists
-        os.remove(dbName)                                                      # Delete database
-        print('\nDeleting database: ' + dbName)
+db_path = output_dir + OS_SEP + "database" + OS_SEP + db_name
+
+#---------------------------Delete Database-------------------------------------#
+if mode.lower() == 'delete':                                                    # Delete mode check
+    if os.path.exists(db_path):                                                 # Make sure database exists in output directory
+        os.remove(db_path)                                                      # Delete database
+        print('\nDeleting database: ' + db_path)
     else:
-        raise ErrorDBNotExists(dbName)                                         # If database doesn't exists, raise error
+        raise ErrorDBNotExists(db_path)                                        # If database doesn't exists, raise error
 
 
-#---------------------------Create Database-----------------------------#
-elif MODE.lower() == 'create':                                                 # Create mode check
-    if not os.path.exists(dbName):
-        conn = sqlite3.connect(dbName)
+#---------------------------Create Database-------------------------------------#
+elif mode.lower() == 'create':                                                  # Create mode check
+    if not os.path.exists(db_path):                                             # Make sure database exists in output directory
+        conn = sqlite3.connect(db_path)                                         # Create database
         conn.commit()
-        print('\nCreating database: ' + dbName)
+        print('\nCreating database: ' + db_path)
     else:
-        raise ErrorDBExists(dbName)
+        raise ErrorDBExists(db_path)                                             # If database already exists, raise error
 
 
 #---------------------------Update Database-----------------------------#
-elif MODE.lower() == 'update':
-    if os.path.exists(dbName):
-        conn = sqlite3.connect(dbName)
-        print('\nOpening database: ' + dbName)
+elif mode.lower() == 'update':
+    if os.path.exists(db_path):
+        conn = sqlite3.connect(db_path)
+        print('\nOpening database: ' + db_path)
     else:
-        raise ErrorDBNotExists(dbName)
+        raise ErrorDBNotExists(db_path)
 
 #----------------------------Invalid Mode------------------------------#
 else:
-    raise ErrorInvalidMode(MODE)
+    raise ErrorInvalidMode(mode)
+
 
 
 #------------------------Create Mode Processing------------------------#
 
-if MODE.lower() == 'create' or MODE.lower() == 'update':
+if mode.lower() == 'create' or mode.lower() == 'update':
 
    #-----------------------------NCBI Info-----------------------------#
     EMAIL =  raw_input('\n\
@@ -122,7 +136,11 @@ if MODE.lower() == 'create' or MODE.lower() == 'update':
     #---------------------------Assembly Table--------------------------#
 
     if modify_assembly.lower() == 'y':
-        genomeassembly.AssemblyTable(dbName, ORGANISM, EMAIL)
+        genomeassembly.AssemblyTable(db_path, ORGANISM, EMAIL, output_dir)
+
+
+
+
 
     #------------------------Bioproject User Input----------------------#
     modify_bioproject = raw_input('\n\
@@ -130,12 +148,34 @@ if MODE.lower() == 'create' or MODE.lower() == 'update':
     while modify_bioproject.lower() != 'y' and modify_bioproject.lower() != 'n':
         print ("\tInvalid input, must be either 'Y','y','N', or 'n'.")
         modify_bioproject = raw_input('\n\
-        Do you want to create/update the Assembly table? (Y/N)')
+        Do you want to create/update the Bioproject table? (Y/N)')
 
 
     #---------------------------Bioproject Table------------------------#
     if modify_bioproject.lower() == 'y':
-        genomebioproject.BioProjectTable(dbName, ORGANISM, EMAIL)
+        genomebioproject.BioProjectTable(db_path, ORGANISM, EMAIL, output_dir)
+
+
+
+
+
+
+    #----------------------------SRA User Input-------------------------#
+    modify_sra = raw_input('\n\
+    Do you want to create/update the SRA table? (Y/N)')
+    while modify_sra.lower() != 'y' and modify_sra.lower() != 'n':
+        print ("\tInvalid input, must be either 'Y','y','N', or 'n'.")
+        modify_sra = raw_input('\n\
+        Do you want to create/update the SRA table? (Y/N)')
+
+
+    #-----------------------------SRA Table-----------------------------#
+    if modify_sra.lower() == 'y':
+        genomesra.SRATable(db_path, ORGANISM, EMAIL, output_dir)
+
+
+
+
 
     #------------------------Biosample User Input----------------------#
     modify_biosample = raw_input('\n\
@@ -148,7 +188,11 @@ if MODE.lower() == 'create' or MODE.lower() == 'update':
 
     #---------------------------Biosample Table------------------------#
     if modify_biosample.lower() == 'y':
-        genomebiosample.BioSampleTable(dbName, ORGANISM, EMAIL)
+        genomebiosample.BioSampleTable(db_path, ORGANISM, EMAIL, output_dir)
+
+
+
+
 
 
     #-----------------------Nucleotide User Input----------------------#
@@ -157,9 +201,11 @@ if MODE.lower() == 'create' or MODE.lower() == 'update':
     while modify_nucleotide.lower() != 'y' and modify_nucleotide.lower() != 'n':
         print ("\tInvalid input, must be either 'Y','y','N', or 'n'.")
         modify_nucleotide = raw_input('\n\
-        Do you want to create/update the nucleotide table and download genomes? (Y/N)')
+        Do you want to create/update the Nucleotide table and download genomes? (Y/N)')
 
 
     #--------------------------Nucleotide Table------------------------#
     if modify_nucleotide.lower() == 'y':
-        genomenucleotide.NucleotideTable(dbName, ORGANISM, EMAIL)
+        genomenucleotide.NucleotideTable(db_path, ORGANISM, EMAIL, output_dir)
+
+print("Genome Collector module has finished.")

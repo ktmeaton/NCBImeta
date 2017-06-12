@@ -16,12 +16,13 @@ from Bio import Entrez                                                         #
 from genomeutilities import metadata_count, os_check
 from genomesra import SRATable
 
-def BioProjectTable(dbName, ORGANISM, EMAIL):
+def BioProjectTable(dbName, ORGANISM, EMAIL, output_dir):
     ''' '''
     print("\nCreating/Updating the BioProject table using the following parameters: ")
-    print("\t" + dbName)
-    print("\t" + ORGANISM)
-    print("\t" + EMAIL +"\n\n")
+    print("Database: " + "\t" + dbName)
+    print("Organism: " + "\t" + ORGANISM)
+    print("Email: " + "\t" + EMAIL)
+    print("Output Directory: " + "\t" + output_dir + "\n\n")
 
     Entrez.email = EMAIL
 
@@ -30,10 +31,9 @@ def BioProjectTable(dbName, ORGANISM, EMAIL):
     #-----------------------------------------------------------------------#
     #                                File Setup                             #
     #-----------------------------------------------------------------------#
-    if not os.path.exists("log"):                                              # Check if log directory exists
-        os.makedirs("log")
+    log_path = output_dir + OS_SEP + "log"
 
-    str_bioproject_log_file = "log" + OS_SEP + ORGANISM.replace(" ", "_") + "_db_bioproject.log"
+    str_bioproject_log_file = log_path + OS_SEP + ORGANISM.replace(" ", "_") + "_db_bioproject.log"
 
     if os.path.exists(str_bioproject_log_file):
         bioproject_log_file = open(str_bioproject_log_file, "a")               # Open logfile for appending
@@ -83,7 +83,7 @@ def BioProjectTable(dbName, ORGANISM, EMAIL):
         #-------------------Progress Log and Entry Counter-------------------#
         num_assembly_processed += 1                                            # Increment assembly entry counter
 
-        print("Processing BioProject Accession: " +
+        print("Processing Assembly Accession: " +
                     str(num_assembly_processed) +
                     "/" +
                     str(num_assembly))                                         # Print record progress to screen
@@ -99,12 +99,13 @@ def BioProjectTable(dbName, ORGANISM, EMAIL):
         SELECT EXISTS(SELECT accession
                             FROM BioProject
                             WHERE accession=?)''',
-                            (asm_bioproj,))                                 # Check if bioproject record is already in BioProject Table
+                            (asm_bioproj,))                                   # Check if bioproject record is already in BioProject Table
 
         record_exists = cur.fetchone()[0]                                      # 0 if not found, 1 if found
 
 
-        if not record_exists:
+        if record_exists:
+            continue
             '''
             IMPORTANT:
             The bioproject accession should not exists in the BioProject table
@@ -112,88 +113,76 @@ def BioProjectTable(dbName, ORGANISM, EMAIL):
             ie. The database does not get updated until the end of each record.
             '''
 
-            # ---------------------Get Bioproject ID-----------------------#
-            search_term = ORGANISM + "[Orgn] AND " + asm_bioproj + "[Bioproject]"
-            handle = Entrez.esearch(db="bioproject",
-                        term=search_term,
-                        retmax = 1)
-            record = Entrez.read(handle)
-            ID = record['IdList'][0]
+        # ---------------------Get Bioproject ID-----------------------#
+        search_term = ORGANISM + "[Orgn] AND " + asm_bioproj + "[Bioproject]"
+        handle = Entrez.esearch(db="bioproject",
+                    term=search_term,
+                    retmax = 1)
+        record = Entrez.read(handle)
+        ID = record["IdList"][0]
 
-            #-------------------------Bioproject Record--------------------#
-            ID_handle = Entrez.esummary(db="bioproject",id=ID)                 # Search for biorproject entry using ID
-            ID_record = Entrez.read(ID_handle)                                 # Read in the search results
-            record_dict = ID_record['DocumentSummarySet']['DocumentSummary'][0]                                        # Store metadata as dictionary
-
-
-            # -----------------------Bioproject attributes-----------------#
-            accession = record_dict['Project_Acc']
-            status = record_dict['Sequencing_Status']
-            data_type = record_dict['Project_Data_Type']
+        #-------------------------Bioproject Record--------------------#
+        ID_handle = Entrez.esummary(db="bioproject",id=ID)                 # Search for biorproject entry using ID
+        ID_record = Entrez.read(ID_handle)                                 # Read in the search results
+        record_dict = ID_record['DocumentSummarySet']['DocumentSummary'][0]                                        # Store metadata as dictionary
 
 
-            # Objectives
-            obj_list = record_dict['Project_Objectives_List']
-            obj_str = ""
-            obj_counter = 1
-            for item in obj_list:
-               if obj_counter < len(obj_list):
-                  obj_str += item['Project_ObjectivesType'] + ", "
-               else:
-                  obj_str += item['Project_ObjectivesType']
-               obj_counter += 1
+        # -----------------------Bioproject attributes-----------------#
+        accession = record_dict['Project_Acc']
+        status = record_dict['Sequencing_Status']
+        data_type = record_dict['Project_Data_Type']
 
 
-            proj_scope = record_dict['Project_Target_Scope']
-            description = record_dict['Project_Description']
-            organization = record_dict['Submitter_Organization']
-            reg_date = record_dict['Registration_Date']
+        # Objectives
+        obj_list = record_dict['Project_Objectives_List']
+        obj_str = ""
+        obj_counter = 1
+        for item in obj_list:
+           if obj_counter < len(obj_list):
+              obj_str += item['Project_ObjectivesType'] + ", "
+           else:
+              obj_str += item['Project_ObjectivesType']
+           obj_counter += 1
 
 
-            # ---------------------Get Bioproject ID-----------------------#
-            search_term = ORGANISM + "[Orgn] AND " + accession  + "[Bioproject]"
-            handle = Entrez.esearch(db="sra",
-                        term=search_term,
-                        retmax = 1)
-            record = Entrez.read(handle)
-            ID = record['IdList'][0]
-            
-            #-------------------------Bioproject Record--------------------#
-            ID_handle = Entrez.esummary(db="sra",id=ID)                 # Search for biorproject entry using ID
-            ID_record = Entrez.read(ID_handle)                                 # Read in the search results
+        proj_scope = record_dict['Project_Target_Scope']
+        description = record_dict['Project_Description']
+        organization = record_dict['Submitter_Organization']
+        reg_date = record_dict['Registration_Date']
 
-    
 
-            # --------------------------Update Database--------------------------#
-            print ("Writing: " + accession + " to the database.\n")
-            cur.execute('''
-            INSERT INTO BioProject (bioproject_id,
-                                  accession,
-                                  status,
-                                  data_type,
-                                  objectives,
-                                  project_scope,
-                                  description,
-                                  organization,
-                                  registration_date)
-                                  VALUES
-                                  (?, ?, ?, ?, ?, ?, ?, ?, ?)''',
-                             (ID,
-                             accession,
+
+
+        # --------------------------Update Database--------------------------#
+        print ("Writing Bioproject: " + accession + " to the database.\n")
+        cur.execute('''
+        INSERT INTO BioProject (bioproject_id,
+                              accession,
                               status,
                               data_type,
-                              obj_str,
-                              proj_scope,
+                              objectives,
+                              project_scope,
                               description,
                               organization,
-                              reg_date))
+                              registration_date)
+                              VALUES
+                              (?, ?, ?, ?, ?, ?, ?, ?, ?)''',
+                         (ID,
+                         accession,
+                          status,
+                          data_type,
+                          obj_str,
+                          proj_scope,
+                          description,
+                          organization,
+                          reg_date))
 
-            # Write to logfile
-            now = datetime.datetime.now()
-            bioproject_log_file.write("[" + str(now) + "]" +
-                         "\t" + "New accession number added:" +
-                         "\t" + accession + "." + "\n")
-            conn.commit()
+        # Write to logfile
+        now = datetime.datetime.now()
+        bioproject_log_file.write("[" + str(now) + "]" +
+                     "\t" + "New accession number added:" +
+                     "\t" + accession + "." + "\n")
+        conn.commit()
 
 
 
