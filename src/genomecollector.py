@@ -28,8 +28,7 @@ import genomesra
 OS_SEP = genomeutilities.os_check()                                             # Retrieve the directory separator by OS
 
 parser = argparse.ArgumentParser(description='Description of the Genome Collector.',
-                                 add_help=True,
-                                 version = 'GenomeCollector 2.0')
+                                 add_help=True)
 
 mandatory = parser.add_argument_group('mandatory')
 create_update = parser.add_argument_group('create/update')
