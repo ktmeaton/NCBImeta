@@ -185,7 +185,7 @@ def print_record_keys(record_dict):
        key_list.append(key)
    key_list.sort()
    for key in key_list:
-       print key
+       print(key)
 
 def retrieve_bioproject_gb(gb_handle):
    ''' '''
