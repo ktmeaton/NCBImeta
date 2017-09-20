@@ -6,13 +6,18 @@ and this project "attempts" to adhere to [Semantic Versioning](http://semver.org
 
 ## [Unreleased]
 
-## [0.1.1] - 2017-08-30
+## [v0.1.2] - 2017-0920
 ### Added
 - 
+## [0.1.1] - 2017-0919
+### Added
+- SRA Table
 
 ### Changed
+- Bug-fix, multiple accession versions
 - Started better version control
 
 https://github.com/ktmeaton/GenomeCollector
 
-[Unreleased]: https://github.com/ktmeaton/PlaguePipeline/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/ktmeaton/PlaguePipeline/compare/v0.1.2...HEAD
+[v0.1.2]: https://github.com/ktmeaton/PlaguePipeline/compare/0.1.1...v0.1.2
