@@ -19,5 +19,5 @@ and this project "attempts" to adhere to [Semantic Versioning](http://semver.org
 
 https://github.com/ktmeaton/GenomeCollector
 
-[Unreleased]: https://github.com/ktmeaton/PlaguePipeline/compare/v0.1.2...HEAD
-[v0.1.2]: https://github.com/ktmeaton/PlaguePipeline/compare/0.1.1...v0.1.2
+[Unreleased]: https://github.com/ktmeaton/GenomeCollector/compare/v0.1.2...HEAD
+[v0.1.2]: https://github.com/ktmeaton/GenomeCollector/compare/0.1.1...v0.1.2
