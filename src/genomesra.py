@@ -49,6 +49,8 @@ def SRATable(dbName, ORGANISM, EMAIL, output_dir):
     conn = sqlite3.connect(dbName)                                   # Connect to the DB
     cur = conn.cursor()                                                 # Create cursor for commands
 
+    #cur.execute('''
+    #Drop TABLE IF EXISTS SRA''')
 
     #---------------------------SRA Table-----------------------------------#
     cur.execute('''
@@ -240,4 +242,4 @@ def SRATable(dbName, ORGANISM, EMAIL, output_dir):
     cur.close()                                                        # Close the database
     sra_log_file.close()                                                   # Close the logfile
 
-
+#SRATable("database/Yersinia_pestis_db.sqlite", "Yersinia pestis", "ktmeaton@gmail.com", ".")

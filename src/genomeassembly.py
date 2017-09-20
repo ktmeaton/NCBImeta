@@ -96,7 +96,6 @@ def AssemblyTable(dbName, ORGANISM, EMAIL, output_dir):
     #-----------------------------------------------------------------------#
 
     for ID in record['IdList']:
-
        #-------------------Progress Log and Entry Counter-------------------#
        num_processed += 1                                                          # Increment entry counter
        print("Processing record: " +
@@ -119,7 +118,6 @@ def AssemblyTable(dbName, ORGANISM, EMAIL, output_dir):
            record_dict = ID_record['DocumentSummarySet']['DocumentSummary'][0]     # Store Assembly information as dictionary
 
 
-           tmp_file = open("assembly_record_dict.txt",'w')
            entrez_string_element = type(record_dict['Taxid'])                      # Get type of Bio String object (used in type checking)
 
 
@@ -138,7 +136,7 @@ def AssemblyTable(dbName, ORGANISM, EMAIL, output_dir):
            meta_string = record_dict['Meta']                                       # Metadata as entered by submitter
 
 
-
+           print(accession)
            # -----------------------Metadata attributes-----------------------#
            chromosome_count = metadata_count(meta_string, "chromosome")            # Number of chromosomes
            replicon_count = metadata_count(meta_string, "replicon")                # Total number of replicons

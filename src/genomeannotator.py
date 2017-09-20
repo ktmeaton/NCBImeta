@@ -19,8 +19,7 @@ from genomeutilities import os_check
 #-----------------------------------------------------------------------#
 
 parser = argparse.ArgumentParser(description='Description of the Genome Collector Annotation Tool.',
-                                 add_help=True,
-                                 version = 'GenomeCollector 2.0')
+                                 add_help=True)
 
 mandatory = parser.add_argument_group('mandatory')
 bonus = parser.add_argument_group('bonus')
@@ -108,12 +107,11 @@ while annot_line:
     source = split_line[9]
     host = split_line[8]
     year = split_line[7]
+    biovar = split_line[6]
 
-    annot_dict[accession] = [latitude, longitude, source, host, year]
+    annot_dict[accession] = [latitude, longitude, source, host, year, biovar]
     annot_line = annot_file.readline()                                    # Read in the next line  
 
-
-print(annot_dict[accession])  
 
 #-----------------------------------------------------------------------#
 #                   Iterate Through Annotation Dict                     #
@@ -145,22 +143,24 @@ for element in annot_dict:
     else:
         raise ErrorAccessionNotExistInDB(element)                        # If accession doesn't exists, raise error
 
-    print(element_biosample)                   
     latitude = annot_dict[element][0]
     longitude = annot_dict[element][1]
     source = annot_dict[element][2]
     host = annot_dict[element][3]
     year = annot_dict[element][4]
+    biovar = annot_dict[element][5]
     
     #------------Annotate Metadata for biosample--------------#
 
     cur.execute('''
-    UPDATE BioSample SET latitude=?,longitude=?,geographic_location=?,host=?,collection_date=? WHERE accession=?''',
+    UPDATE BioSample SET
+latitude=?,longitude=?,geographic_location=?,host=?,collection_date=?,biovar=? WHERE accession=?''',
                 (latitude,
                  longitude,
                  source,
                  host,
                  year,
+		 biovar,
                  element_biosample,))
 
     #------------------------WWrite to Logfile-------------------------#

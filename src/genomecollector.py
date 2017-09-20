@@ -28,8 +28,7 @@ import genomesra
 OS_SEP = genomeutilities.os_check()                                             # Retrieve the directory separator by OS
 
 parser = argparse.ArgumentParser(description='Description of the Genome Collector.',
-                                 add_help=True,
-                                 version = 'GenomeCollector 2.0')
+                                 add_help=True)
 
 mandatory = parser.add_argument_group('mandatory')
 create_update = parser.add_argument_group('create/update')
@@ -120,17 +119,17 @@ else:
 if mode.lower() == 'create' or mode.lower() == 'update':
 
    #-----------------------------NCBI Info-----------------------------#
-    EMAIL =  raw_input('\n\
+    EMAIL =  input('\n\
     Please enter a valid email address for NCBI queries: ')
-    ORGANISM = raw_input('\n\
+    ORGANISM = input('\n\
     Please enter the name of the organism of interest: ')
 
     #------------------------Assembly User Input-----------------------#
-    modify_assembly = raw_input('\n\
+    modify_assembly = input('\n\
     Do you want to create/update the Assembly table? (Y/N)')
     while modify_assembly.lower() != 'y' and modify_assembly.lower() != 'n':
         print ("\tInvalid input, must be either 'Y','y','N', or 'n'.")
-        modify_assembly = raw_input('\n\
+        modify_assembly = input('\n\
         Do you want to create/update the Assembly table? (Y/N)')
 
     #---------------------------Assembly Table--------------------------#
@@ -143,11 +142,11 @@ if mode.lower() == 'create' or mode.lower() == 'update':
 
 
     #------------------------Bioproject User Input----------------------#
-    modify_bioproject = raw_input('\n\
+    modify_bioproject = input('\n\
     Do you want to create/update the BioProject table? (Y/N)')
     while modify_bioproject.lower() != 'y' and modify_bioproject.lower() != 'n':
         print ("\tInvalid input, must be either 'Y','y','N', or 'n'.")
-        modify_bioproject = raw_input('\n\
+        modify_bioproject = input('\n\
         Do you want to create/update the Bioproject table? (Y/N)')
 
 
@@ -161,11 +160,11 @@ if mode.lower() == 'create' or mode.lower() == 'update':
 
 
     #----------------------------SRA User Input-------------------------#
-    modify_sra = raw_input('\n\
+    modify_sra = input('\n\
     Do you want to create/update the SRA table? (Y/N)')
     while modify_sra.lower() != 'y' and modify_sra.lower() != 'n':
         print ("\tInvalid input, must be either 'Y','y','N', or 'n'.")
-        modify_sra = raw_input('\n\
+        modify_sra = input('\n\
         Do you want to create/update the SRA table? (Y/N)')
 
 
@@ -178,11 +177,11 @@ if mode.lower() == 'create' or mode.lower() == 'update':
 
 
     #------------------------Biosample User Input----------------------#
-    modify_biosample = raw_input('\n\
+    modify_biosample = input('\n\
     Do you want to create/update the BioSample table? (Y/N)')
     while modify_biosample.lower() != 'y' and modify_biosample.lower() != 'n':
         print ("\tInvalid input, must be either 'Y','y','N', or 'n'.")
-        modify_biosample = raw_input('\n\
+        modify_biosample = input('\n\
         Do you want to create/update the BioSample table? (Y/N)')
 
 
@@ -196,11 +195,11 @@ if mode.lower() == 'create' or mode.lower() == 'update':
 
 
     #-----------------------Nucleotide User Input----------------------#
-    modify_nucleotide = raw_input('\n\
+    modify_nucleotide = input('\n\
     Do you want to create/update the Nucleotide table and download genomes? (Y/N)')
     while modify_nucleotide.lower() != 'y' and modify_nucleotide.lower() != 'n':
         print ("\tInvalid input, must be either 'Y','y','N', or 'n'.")
-        modify_nucleotide = raw_input('\n\
+        modify_nucleotide = input('\n\
         Do you want to create/update the Nucleotide table and download genomes? (Y/N)')
 
 

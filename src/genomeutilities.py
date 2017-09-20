@@ -185,7 +185,7 @@ def print_record_keys(record_dict):
        key_list.append(key)
    key_list.sort()
    for key in key_list:
-       print key
+       print(key)
 
 def retrieve_bioproject_gb(gb_handle):
    ''' '''
@@ -241,4 +241,8 @@ def check_accessory_dir(output_dir):
         os.makedirs(output_dir + OS_SEP + "genomes")
     if not os.path.exists(output_dir + OS_SEP + "annotate"):                                              # Check if log directory exists
         os.makedirs(output_dir + OS_SEP + "annotate")        
+    if not os.path.exists(output_dir + OS_SEP + "genbank"):
+        os.makedirs(output_dir + OS_SEP + "genbank")
+    if not os.path.exists(output_dir + OS_SEP + "gff3"):
+        os.makedirs(output_dir + OS_SEP + "gff3")
     return 0                                
