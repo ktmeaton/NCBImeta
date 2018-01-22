@@ -7,6 +7,7 @@ Yersinia pestis nucleotide database generator.
 
 import sqlite3                                                                 # SQL database functionality
 import os                                                                      # Create directories
+import time
 from genomeutilities import *
 import datetime                                                                # Date and time for log files
 from Bio import Entrez                                                         # Entrez NCBI API from biopython
@@ -48,6 +49,7 @@ def NucleotideTable(dbName, ORGANISM, EMAIL, output_dir):
 
 
     data_path = output_dir + OS_SEP + "data" + OS_SEP                              # Path to the data folder
+    genbank_path = output_dir + OS_SEP + "genbank" + OS_SEP
 
 
     #-----------------------------------------------------------------------#
@@ -167,6 +169,10 @@ def NucleotideTable(dbName, ORGANISM, EMAIL, output_dir):
         if not os.path.exists(assembly_directory):
             os.makedirs(assembly_directory)                                    # If not, create assembly directory
 
+        assembly_gb_directory = genbank_path + OS_SEP + organism + "_" + asm_accession 
+        if not os.path.exists(assembly_gb_directory):
+            os.makedirs(assembly_gb_directory)
+
         search_term = (ORGANISM + "[Orgn] AND "  +
                         asm_bioproj + "[Bioproject] AND " +
                         asm_biosample + "[Biosample] " +
@@ -243,11 +249,17 @@ def NucleotideTable(dbName, ORGANISM, EMAIL, output_dir):
 
             # ------------------Create genbank filename--------------#
             genbank_file_name = fasta_file_name.replace(".fasta",".gb")
-            genbank_file_path = fasta_file_path.replace(".fasta",".gb")
+            genbank_file_path = assembly_gb_directory + OS_SEP + genbank_file_name
+            
 
+   
 
             # ----------------Check if fasta file exists-------------------#
             if not os.path.exists(fasta_file_path):
+                #!#!#!#!#!
+                time.sleep(30)
+                #!#!#!#!#!
+
 
                 print("\tDownloading:\t" + fasta_file_name)                          # Print progress to screen
 
