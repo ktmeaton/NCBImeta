@@ -23,7 +23,7 @@ jobs:
       # Check 2 most recent tags, overwrites
       - name: Tagged Release Notes
         run: |
-          ./autologs \
+          ./autologs/autologs \
             --release \
             -o release-notes.md \
             --old-tag `git tag | tail -n2 | head -n1` \
