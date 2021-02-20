@@ -1,4 +1,4 @@
-# ![ktmeaton/NCBImeta](https://raw.githubusercontent.com/ktmeaton/NCBImeta/master/docs/images/ncbimeta-logo.png)
+# ![ktmeaton/NCBImeta](https://raw.githubusercontent.com/ktmeaton/NCBImeta/master/logo.png)
 
 **Efficient and comprehensive metadata acquisition from NCBI databases (includes SRA).**
 
@@ -180,7 +180,6 @@ Eaton, K. (2020). NCBImeta: efficient and comprehensive metadata retrieval from 
 ## Authors
 
 Author: [Katherine Eaton](https://github.com/ktmeaton) (ktmeaton@gmail.com)  
-Logo Assets: <https://www.pexels.com/>, <https://unsplash.com/>, [Free Google Slides Templates](https://freegoogleslidestemplates.com/)
 
 ## Additional Contributors
 
