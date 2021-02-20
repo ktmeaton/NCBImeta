@@ -1,0 +1,3 @@
+[submodule "autologs"]
+	path = autologs
+	url = https://github.com/ktmeaton/autologs

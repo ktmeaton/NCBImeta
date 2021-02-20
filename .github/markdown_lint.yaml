@@ -9,3 +9,4 @@ no-trailing-spaces:
 no-inline-html:
   allowed_elements:
     - img
+no-bare-urls: false
