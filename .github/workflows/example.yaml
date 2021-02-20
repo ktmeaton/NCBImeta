@@ -21,29 +21,26 @@ on:
 jobs:
 #------------------------------------------------------------------------------#
   example:
-    runs-on: ubuntu-latest
-    # Test across multiple versions of python
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
+        os: [ubuntu-latest, macos-latest]
         python-version: [3.6, 3.7, 3.8]
     steps:
-      #------------------------------------------------------------------------#
-      # Checkout repo
-      - uses: actions/checkout@v2
-      #------------------------------------------------------------------------#
-      # Deploy with sepecified python ver
+
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
       - name: Python Setup ${{ matrix.python-version }}
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-      #------------------------------------------------------------------------#
-      # Install dependencies and program
-      - name: Installation
+
+      - name: Pip Install
         run: |
           python -m pip install --upgrade pip
           pip install .
-      #------------------------------------------------------------------------#
-      # Run the quick start example
+
       - name: Quick Start Example
         run: |
           NCBImeta --flat --config example/config.yaml --force-pause-seconds 0 --email ${{ secrets.NCBI_EMAIL }} --api ${{ secrets.NCBI_API_KEY }}

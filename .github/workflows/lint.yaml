@@ -35,7 +35,7 @@ jobs:
       #------------------------------------------------------------------------#
         # Install dependencies
       - name: Setup Python
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
           python-version: '3.7'
       - name: Install pre-commit with dev mode
@@ -76,7 +76,7 @@ jobs:
       #------------------------------------------------------------------------#
       # Setup python, configure to 3.7 for black
       - name: Set up python
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
           python-version: '3.7'
       #------------------------------------------------------------------------#
