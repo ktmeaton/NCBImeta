@@ -16,8 +16,9 @@ test/test_SRA.txt
 test/database/*
 test/log/*
 test/test/*
-.coverage
+.coverage*
 coverage.xml
 example/database/*
 example/log/*
 example/yersinia*
+*.bak

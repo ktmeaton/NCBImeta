@@ -1,5 +1,5 @@
 #------------------------------------------------------------------------------#
-name: Deploy
+name: Deploy to PyPI
 #------------------------------------------------------------------------------#
 # Workflow conditions
 on:
@@ -12,23 +12,20 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      #------------------------------------------------------------------------#
-      # Checkout repo
-      - uses: actions/checkout@v2
-      #------------------------------------------------------------------------#
-      # Deploy with sepecified python ver
+
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
       - name: Set up Python
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
           python-version: '3.7'
-      #------------------------------------------------------------------------#
-      # Install deployment dependencies
-      - name: Install dependencies
+
+      - name: Pip Install
         run: |
           pip install --upgrade pip
           pip install --upgrade setuptools wheel twine
-      #------------------------------------------------------------------------#
-      # Build and deploy with twine
+
       - name: Build and Deploy
         env:
           TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}

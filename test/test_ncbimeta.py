@@ -20,8 +20,8 @@ def test_ncbimeta_run():
     """Test the NCBImeta application for run completion"""
     # User the stripped down testing config file
     config_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "test.yaml")
-    test_cmd = "ncbimeta/NCBImeta.py --flat --config " + config_file
-    # test the main NCBImeta.py through a subprocess
+    test_cmd = "ncbimeta/NCBImeta --flat --config " + config_file
+    # test the main NCBImeta through a subprocess
     returned_value = subprocess.call(test_cmd, shell=True)
     # If it returns a non-zero value, it failed
     assert returned_value == 0
@@ -31,8 +31,8 @@ def test_ncbimeta_noflatmode(tmpdir):
     """Test the NCBImeta application without flat mode"""
     # Use the stripped down testing config file, rewrite OUTPUT_DIR value
     config_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "test.yaml")
-    test_cmd = "ncbimeta/NCBImeta.py --config " + config_file
-    # test the main NCBImeta.py through a subprocess
+    test_cmd = "ncbimeta/NCBImeta --config " + config_file
+    # test the main NCBImeta through a subprocess
     returned_value = subprocess.call(test_cmd, shell=True)
     # If it returns a non-zero value, it failed
     assert returned_value == 0
@@ -42,7 +42,7 @@ def test_ncbimeta_ConfigFileNotExists(tmpdir):
     """Test for error catching when a config file does not exist"""
     # This file is not created, just a tmp path
     config_file = os.path.join(tmpdir.strpath, "tmpfile")
-    test_cmd = "ncbimeta/NCBImeta.py --flat --config " + config_file
+    test_cmd = "ncbimeta/NCBImeta --flat --config " + config_file
     # Use a try-catch with the sub-process of module
     try:
         subprocess.check_output(test_cmd, shell=True, stderr=subprocess.STDOUT)
@@ -61,7 +61,7 @@ def test_ncbimeta_ConfigFileNotYAML(tmpdir):
     # Create config file (ie. open then close)
     open(config_file_name, "a").close()
 
-    test_cmd = "ncbimeta/NCBImeta.py --flat --config " + config_file_name
+    test_cmd = "ncbimeta/NCBImeta --flat --config " + config_file_name
     # Use a try-catch with the sub-process of module
     try:
         subprocess.check_output(test_cmd, shell=True, stderr=subprocess.STDOUT)
@@ -82,7 +82,7 @@ def test_ncbimeta_ErrorConfigParameter_OUTPUT_DIR(tmpdir):
     config_file.write("OUTPUT_DIRR: output")
     config_file.close()
 
-    test_cmd = "ncbimeta/NCBImeta.py --flat --config " + config_file_name
+    test_cmd = "ncbimeta/NCBImeta --flat --config " + config_file_name
     # Use a try-catch with the sub-process of module
     try:
         subprocess.check_output(test_cmd, shell=True, stderr=subprocess.STDOUT)
@@ -104,7 +104,7 @@ def test_ncbimeta_ErrorConfigParameter_EMAIL(tmpdir):
     config_file.write("OUTPUT_DIR: output" + "\n" + "EMAILL: email")
     config_file.close()
 
-    test_cmd = "ncbimeta/NCBImeta.py --flat --config " + config_file_name
+    test_cmd = "ncbimeta/NCBImeta --flat --config " + config_file_name
     # Use a try-catch with the sub-process of module
     try:
         subprocess.check_output(test_cmd, shell=True, stderr=subprocess.STDOUT)
@@ -128,7 +128,7 @@ def test_ncbimeta_ErrorConfigParameter_API_KEY(tmpdir):
     )
     config_file.close()
 
-    test_cmd = "ncbimeta/NCBImeta.py --flat --config " + config_file_name
+    test_cmd = "ncbimeta/NCBImeta --flat --config " + config_file_name
     # Use a try-catch with the sub-process of module
     try:
         subprocess.check_output(test_cmd, shell=True, stderr=subprocess.STDOUT)
@@ -158,7 +158,7 @@ def test_ncbimeta_ErrorConfigParameter_FORCE_PAUSE_SECONDS(tmpdir):
     )
     config_file.close()
 
-    test_cmd = "ncbimeta/NCBImeta.py --flat --config " + config_file_name
+    test_cmd = "ncbimeta/NCBImeta --flat --config " + config_file_name
     # Use a try-catch with the sub-process of module
     try:
         subprocess.check_output(test_cmd, shell=True, stderr=subprocess.STDOUT)
@@ -190,7 +190,7 @@ def test_ncbimeta_ErrorConfigParameter_DATABASE(tmpdir):
     )
     config_file.close()
 
-    test_cmd = "ncbimeta/NCBImeta.py --flat --config " + config_file_name
+    test_cmd = "ncbimeta/NCBImeta --flat --config " + config_file_name
     # Use a try-catch with the sub-process of module
     try:
         subprocess.check_output(test_cmd, shell=True, stderr=subprocess.STDOUT)
@@ -224,7 +224,7 @@ def test_ncbimeta_ErrorConfigParameter_TABLES(tmpdir):
     )
     config_file.close()
 
-    test_cmd = "ncbimeta/NCBImeta.py --flat --config " + config_file_name
+    test_cmd = "ncbimeta/NCBImeta --flat --config " + config_file_name
     # Use a try-catch with the sub-process of module
     try:
         subprocess.check_output(test_cmd, shell=True, stderr=subprocess.STDOUT)
@@ -260,7 +260,7 @@ def test_ncbimeta_ErrorConfigParameter_SEARCH_TERMS(tmpdir):
     )
     config_file.close()
 
-    test_cmd = "ncbimeta/NCBImeta.py --flat --config " + config_file_name
+    test_cmd = "ncbimeta/NCBImeta --flat --config " + config_file_name
     # Use a try-catch with the sub-process of module
     try:
         subprocess.check_output(test_cmd, shell=True, stderr=subprocess.STDOUT)
@@ -298,7 +298,7 @@ def test_ncbimeta_ErrorConfigParameter_TABLE_COLUMNS(tmpdir):
     )
     config_file.close()
 
-    test_cmd = "ncbimeta/NCBImeta.py --flat --config " + config_file_name
+    test_cmd = "ncbimeta/NCBImeta --flat --config " + config_file_name
     # Use a try-catch with the sub-process of module
     try:
         subprocess.check_output(test_cmd, shell=True, stderr=subprocess.STDOUT)
@@ -336,7 +336,7 @@ def test_ncbimeta_ErrorConfigParameter_no_EMAIL(tmpdir):
     )
     config_file.close()
 
-    test_cmd = "ncbimeta/NCBImeta.py --flat --config " + config_file_name
+    test_cmd = "ncbimeta/NCBImeta --flat --config " + config_file_name
     # Use a try-catch with the sub-process of module
     try:
         subprocess.check_output(test_cmd, shell=True, stderr=subprocess.STDOUT)
@@ -367,7 +367,7 @@ def test_ncbimeta_OutputDirNotExists(tmpdir):
     with open(config_file, "a") as file:
         file.write(filedata)
 
-    test_cmd = "ncbimeta/NCBImeta.py --flat --config " + config_file
+    test_cmd = "ncbimeta/NCBImeta --flat --config " + config_file
     # Use a try-catch with the sub-process module
     try:
         subprocess.check_output(test_cmd, shell=True, stderr=subprocess.STDOUT)
@@ -397,7 +397,7 @@ def test_ncbimeta_improper_table_name(tmpdir):
     with open(config_file, "a") as file:
         file.write(filedata)
 
-    test_cmd = "ncbimeta/NCBImeta.py --flat --config " + config_file
+    test_cmd = "ncbimeta/NCBImeta --flat --config " + config_file
     # Use a try-catch with the sub-process module
     try:
         subprocess.check_output(test_cmd, shell=True, stderr=subprocess.STDOUT)
@@ -427,7 +427,7 @@ def test_ncbimeta_improper_column_name(tmpdir):
     with open(config_file, "a") as file:
         file.write(filedata)
 
-    test_cmd = "ncbimeta/NCBImeta.py --flat --config " + config_file
+    test_cmd = "ncbimeta/NCBImeta --flat --config " + config_file
     # Use a try-catch with the sub-process module
     try:
         subprocess.check_output(test_cmd, shell=True, stderr=subprocess.STDOUT)
@@ -458,7 +458,7 @@ def test_ncbimeta_missing_xpath_query(tmpdir):
     with open(config_file, "a") as file:
         file.write(filedata)
 
-    test_cmd = "ncbimeta/NCBImeta.py --flat --config " + config_file
+    test_cmd = "ncbimeta/NCBImeta --flat --config " + config_file
     # Use a try-catch with the sub-process module
     try:
         subprocess.check_output(test_cmd, shell=True, stderr=subprocess.STDOUT)

@@ -5,12 +5,11 @@ name: Build
 on:
   push:
     branches:
-      - 'master'
-      - 'dev'
+      - '*'
     paths:
       - '.github/workflows/build.yaml*'
       - 'example/*'
-      - 'ncbimeta/*.py'
+      - 'ncbimeta/*'
       - 'test/*'
       - 'requirements.txt'
       - 'setup.py'
@@ -23,91 +22,78 @@ on:
 #------------------------------------------------------------------------------#
 jobs:
   #----------------------------------------------------------------------------#
-  # Ubuntu Source Build and Install
-  source_build_ubuntu_py:
-    runs-on: ubuntu-latest
+  # Source Install
+  source_install:
+    name: Source Install
+    runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
+        os: [ubuntu-latest, macos-latest]
         python-version: [3.6, 3.7, 3.8]
+
     steps:
-      - uses: actions/checkout@v2
-      # Setup the difference versions of python
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
       - name: Python Setup ${{ matrix.python-version }}
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-      # Install the main program with setuptools
-      - name: Build From Source
+
+      - name: Install From Source
         run: |
           pip install .
-          NCBImeta.py --version
+          NCBImeta --version
   #----------------------------------------------------------------------------#
-  # Mac OS Source Build and Install
-  source_build_macos_py:
-    runs-on: macos-latest
+  # PyPI Install
+  pypi_install:
+    name: PyPI Install
+    runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
+        os: [ubuntu-latest, macos-latest]
         python-version: [3.6, 3.7, 3.8]
+
     steps:
-      - uses: actions/checkout@v2
-      # Setup the difference versions of python
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
       - name: Python Setup ${{ matrix.python-version }}
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-      # Install the main program with setuptools
-      - name: Build From Source
-        run: |
-          pip install .
-          NCBImeta.py --version
-  #----------------------------------------------------------------------------#
-  # Ubuntu Conda Install
-  conda_build_ubuntu:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      # Install the main program with bioconda
-      - uses: goanpeca/setup-miniconda@v1
-        with:
-          auto-activate-base: true
 
-      - name: Install From Conda
-        shell: bash -l {0}
-        run: |
-          conda install -c bioconda ncbimeta
-          NCBImeta.py --version
-  #----------------------------------------------------------------------------#
-  # MacOS Conda Install
-  conda_build_macos:
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v2
-      # Install the main program with bioconda
-      - uses: goanpeca/setup-miniconda@v1
-        with:
-          auto-activate-base: true
-
-      - name: Install From Conda
-        shell: bash -l {0}
-        run: |
-          conda install -c bioconda ncbimeta
-          NCBImeta.py --version
-  #----------------------------------------------------------------------------#
-  # PyPI Repository Install
-  pypi_build_ubuntu_py:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [3.6, 3.7, 3.8]
-    steps:
-      - uses: actions/checkout@v2
-      # Setup the difference versions of python
-      - name: Python Setup ${{ matrix.python-version }}
-        uses: actions/setup-python@v1
-        with:
-          python-version: ${{ matrix.python-version }}
-      # Install the main program from PyPI
-      - name: Install Main
+      # Remove the .py after v0.8.0
+      - name: Install from PyPI
         run: |
           pip install ncbimeta
+          NCBImeta.py --version
+  #----------------------------------------------------------------------------#
+  # Conda Install
+  conda_install:
+    name: Conda Install
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup Conda
+        uses:  conda-incubator/setup-miniconda@v2
+        with:
+          auto-update-conda: true
+          mamba-version: "*"
+          channels: conda-forge
+
+      # Remove the .py after v0.8.0
+      - name: Install From Conda
+        shell: bash -l {0}
+        run: |
+          mamba install -c bioconda ncbimeta
           NCBImeta.py --version

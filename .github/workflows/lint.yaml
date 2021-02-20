@@ -5,8 +5,7 @@ name: Lint
 on:
   push:
     branches:
-      - 'master'
-      - 'dev'
+      - '*'
     paths:
       - '.github/workflows/*.yaml'
       - '.github/*.yaml'
@@ -15,8 +14,9 @@ on:
       - '*.md'
       - 'config/*md'
       - 'schema/*md'
-      - ncbimeta/*.py
+      - ncbimeta/*
       - test/*.py
+      - '.pre-commit-config.yaml'
   pull_request:
     branches:
       - '*'
@@ -35,7 +35,7 @@ jobs:
       #------------------------------------------------------------------------#
         # Install dependencies
       - name: Setup Python
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
           python-version: '3.7'
       - name: Install pre-commit with dev mode
@@ -49,7 +49,7 @@ jobs:
   #----------------------------------------------------------------------------#
   # Check markdown linter
   markdown_lint:
-    needs: pre_commit
+    #needs: pre_commit
     runs-on: ubuntu-latest
     steps:
       #------------------------------------------------------------------------#
@@ -69,30 +69,32 @@ jobs:
   #----------------------------------------------------------------------------#
   # Check python linters
   python_lint:
-    needs: pre_commit
+    #needs: pre_commit
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       #------------------------------------------------------------------------#
       # Setup python, configure to 3.7 for black
       - name: Set up python
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
           python-version: '3.7'
       #------------------------------------------------------------------------#
       # Install dependencies
       - name: Install linters
-        run: pip install black flake8 flake8-bugbear
+        run: pip install .[dev]
       #------------------------------------------------------------------------#
       # Run python linters
       - name: Run linters
         run: |
           black $(find ${GITHUB_WORKSPACE} -type f -name "*.py")
+          black ncbimeta/NCBImeta*
           flake8 --config ${GITHUB_WORKSPACE}/setup.cfg $(find ${GITHUB_WORKSPACE} -type f -name "*.py")
+          flake8 --config ${GITHUB_WORKSPACE}/setup.cfg ncbimeta/NCBImeta*
   #----------------------------------------------------------------------------#
   # YAML lint template from nf-core eager to trial
   yaml_lint:
-    needs: pre_commit
+    #needs: pre_commit
     runs-on: ubuntu-latest
     steps:
       #------------------------------------------------------------------------#

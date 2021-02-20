@@ -1,0 +1,61 @@
+#------------------------------------------------------------------------------
+name: Release
+#------------------------------------------------------------------------------
+# Workflow conditions
+on:
+  push:
+    tags:
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+#------------------------------------------------------------------------------
+jobs:
+  #----------------------------------------------------------------------------
+  release-notes:
+    name: Release Notes 📰
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+          fetch-depth: 0
+
+      # Check 2 most recent tags, overwrites
+      - name: Tagged Release Notes
+        run: |
+          ./autologs/autologs \
+            --release \
+            -o release-notes.md \
+            --old-tag `git tag | tail -n2 | head -n1` \
+            --new-tag `git tag | tail -n1`
+
+      - name: Upload Release Notes
+        uses: actions/upload-artifact@v2
+        with:
+          name: release-notes
+          path: release-notes.md
+          retention-days: 7
+  #----------------------------------------------------------------------------
+  tagged-release:
+    name: Tagged Release
+    needs: [release-notes]
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Download Release Notes
+        uses: actions/download-artifact@v2
+        with:
+          name: release-notes
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: true
+          prerelease: true
+          body_path: release-notes.md

@@ -8,12 +8,12 @@ with open("requirements.txt", "r") as r:
 
 setuptools.setup(
     name="NCBImeta",
-    version="0.7.0",
+    version="0.7.1dev",
     description=(
         "Efficient and comprehensive metadata acquisition "
         "from the NCBI databases (includes SRA)."
     ),
-    python_requires=">=3",
+    python_requires=">=3.6,<3.9",
     license="MIT",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -45,10 +45,10 @@ setuptools.setup(
         ]
     },
     scripts=[
-        "ncbimeta/NCBImeta.py",
-        "ncbimeta/NCBImetaExport.py",
-        "ncbimeta/NCBImetaJoin.py",
-        "ncbimeta/NCBImetaAnnotateReplace.py",
-        "ncbimeta/NCBImetaAnnotateConcatenate.py",
+        "ncbimeta/NCBImeta",
+        "ncbimeta/NCBImetaExport",
+        "ncbimeta/NCBImetaJoin",
+        "ncbimeta/NCBImetaAnnotateReplace",
+        "ncbimeta/NCBImetaAnnotateConcatenate",
     ],
 )

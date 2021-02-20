@@ -1,3 +1,3 @@
-BioSampleAccession	BioSampleHostDisease	BioSampleCollectionDate
-SAMN12991206	Plague	1984
-MissingAccession123	MissingDisease	MissingDate
+BioSampleAccession	BioSampleOrganism	BioSampleStrain
+SAMN12991206	TestOrganism1	TestStrain1
+MissingAccession123	TestOrganism2	TestStrain2

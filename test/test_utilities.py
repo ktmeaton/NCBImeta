@@ -328,7 +328,7 @@ def test_cli_api_key_bad():
     test_force_pause_seconds = "2"
     test_cmd = " ".join(
         [
-            "ncbimeta/NCBImeta.py --config ",
+            "ncbimeta/NCBImeta --config ",
             config_file,
             "--api",
             test_api_key,

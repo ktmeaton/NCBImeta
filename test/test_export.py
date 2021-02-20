@@ -26,7 +26,7 @@ def test_export_run():
     if not os.path.exists(test_db):
         test_ncbimeta.test_ncbimeta_run()
     test_cmd = (
-        "ncbimeta/NCBImetaExport.py --database "
+        "ncbimeta/NCBImetaExport --database "
         + test_db
         + " --outputdir "
         + test_output_dir
@@ -82,6 +82,7 @@ def test_export_bioprojectvalues(bioproject_table_data):
     # Retrieve the headers and fields
     test_column_list = test_file.readline().strip("\n").split("\t")
     test_metadata_list = (test_file.readline().strip("\n") + "\t" + "").split("\t")
+    print(test_column_list)
     # Populate the dict with data
     test_dict = {}
     for i in range(0, len(test_column_list)):
@@ -135,7 +136,6 @@ def test_export_nucleotidevalues(nucleotide_table_data):
     test_file = open(test_filename, "r")
     # Retrieve the headers and fields
     test_column_list = test_file.readline().strip("\n").split("\t")
-
     # Populate the dict with data
     test_dict = {}
     read_line = test_file.readline().strip("\n")
