@@ -5,7 +5,8 @@ name: Example
 on:
   push:
     branches:
-      - '*'
+      - 'master'
+      - 'dev'
     paths:
       - '.github/workflows/example.yaml*'
       - 'ncbimeta/*'

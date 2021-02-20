@@ -5,7 +5,8 @@ name: Lint
 on:
   push:
     branches:
-      - '*'
+      - 'master'
+      - 'dev'
     paths:
       - '.github/workflows/*.yaml'
       - '.github/*.yaml'
