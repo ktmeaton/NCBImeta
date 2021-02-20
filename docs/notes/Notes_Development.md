@@ -4,6 +4,7 @@
 1. Update miniconda actions and use mamba.
 1. Update lxml for security vulnerability.
 1. Add autologs as a submodule.
+1. Create CHANGELOG with autologs.
 
 ## TO-DO
 
