@@ -2,17 +2,43 @@
 
 ## Development
 
+### Commits
+
+## v0.8.0
+
 ### Notes
 
 1. Start new dev branch for v0.7.1.
 1. Update miniconda actions and use mamba.
 1. Update lxml for security vulnerability.
 1. Add autologs as a submodule.
+1. Create CHANGELOG with autologs.
 1. Simplify test config with less fields to check.
 1. Remove .py extension from executable scripts.
 
+### Pull Requests
+
+* [```pull/19```](https://github.com/ktmeaton/NCBImeta/pull/19) Security fix for lxml, autologs, and workflow overhaul
+
 ### Commits
 
+* [```3b3d630```](https://github.com/ktmeaton/NCBImeta/commit/3b3d630) update autologs for branch and tag link
+* [```b5ee965```](https://github.com/ktmeaton/NCBImeta/commit/b5ee965) update submodules for release
+* [```2290cfc```](https://github.com/ktmeaton/NCBImeta/commit/2290cfc) restrict testing workflows to master and dev
+* [```3efed45```](https://github.com/ktmeaton/NCBImeta/commit/3efed45) Merge pull request #19 from ktmeaton/dev
+* [```b325be9```](https://github.com/ktmeaton/NCBImeta/commit/b325be9) disable fail fast and restrict codecov upload
+* [```5cb358e```](https://github.com/ktmeaton/NCBImeta/commit/5cb358e) workflow overhaul
+* [```cc99998```](https://github.com/ktmeaton/NCBImeta/commit/cc99998) restrict python versions to >=3.6,<3.9
+* [```4eaa9bc```](https://github.com/ktmeaton/NCBImeta/commit/4eaa9bc) overhaul test workflow
+* [```c174036```](https://github.com/ktmeaton/NCBImeta/commit/c174036) overhaul build workflow
+* [```cb0ba1f```](https://github.com/ktmeaton/NCBImeta/commit/cb0ba1f) add execute permissions to the newly renamed files
+* [```0a519e0```](https://github.com/ktmeaton/NCBImeta/commit/0a519e0) replace .py extensions for Utilities script
+* [```bf4f608```](https://github.com/ktmeaton/NCBImeta/commit/bf4f608) update autologs
+* [```db06fd2```](https://github.com/ktmeaton/NCBImeta/commit/db06fd2) update to v0.8.0
+* [```6b85877```](https://github.com/ktmeaton/NCBImeta/commit/6b85877) Remove .py extension from executable scripts
+* [```c73cb41```](https://github.com/ktmeaton/NCBImeta/commit/c73cb41) Update dev changelog
+* [```7c22198```](https://github.com/ktmeaton/NCBImeta/commit/7c22198) simplify database columns for export
+* [```9aacd23```](https://github.com/ktmeaton/NCBImeta/commit/9aacd23) add autolog notes for v0.7.0
 * [```34ba549```](https://github.com/ktmeaton/NCBImeta/commit/34ba549) update lxml for security fixes
 * [```2e203c1```](https://github.com/ktmeaton/NCBImeta/commit/2e203c1) update miniconda action and use mamba for macos
 * [```78b4229```](https://github.com/ktmeaton/NCBImeta/commit/78b4229) lint new mammuthus config
