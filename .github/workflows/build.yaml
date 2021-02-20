@@ -66,14 +66,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       # Install the main program with bioconda
-      - uses: goanpeca/setup-miniconda@v1
+      - uses:  conda-incubator/setup-miniconda@v2
         with:
-          auto-activate-base: true
+          auto-update-conda: true
+          mamba-version: "*"
+          channels: conda-forge
 
       - name: Install From Conda
         shell: bash -l {0}
         run: |
-          conda install -c bioconda ncbimeta
+          mamba install -c bioconda ncbimeta
           NCBImeta.py --version
   #----------------------------------------------------------------------------#
   # MacOS Conda Install
