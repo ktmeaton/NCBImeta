@@ -13,6 +13,9 @@ and this project "attempts" to adhere to [Semantic Versioning](http://semver.org
 - migrate documentation to Read The Docs
 - Add additional contributors to README
 - Allow yaml parameters to be specified at run time (email, api key, force pause seconds)
+
+## [v0.7.1] - 2021-0220 - Development
+
 ## [v0.7.0] - 2020-0824 - Strict Version Control
 
 ### Branches
