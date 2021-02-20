@@ -14,7 +14,7 @@ on:
       - '*.md'
       - 'config/*md'
       - 'schema/*md'
-      - ncbimeta/*.py
+      - ncbimeta/*
       - test/*.py
       - '.pre-commit-config.yaml'
   pull_request:
@@ -88,7 +88,9 @@ jobs:
       - name: Run linters
         run: |
           black $(find ${GITHUB_WORKSPACE} -type f -name "*.py")
+          black ncbimeta/NCBImeta*
           flake8 --config ${GITHUB_WORKSPACE}/setup.cfg $(find ${GITHUB_WORKSPACE} -type f -name "*.py")
+          flake8 --config ${GITHUB_WORKSPACE}/setup.cfg ncbimeta/NCBImeta*
   #----------------------------------------------------------------------------#
   # YAML lint template from nf-core eager to trial
   yaml_lint:

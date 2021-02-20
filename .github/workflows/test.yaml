@@ -9,7 +9,7 @@ on:
     paths:
       - '.github/workflows/test.yaml*'
       - 'example/*'
-      - 'ncbimeta/*.py'
+      - 'ncbimeta/*'
       - 'test/*'
       - 'requirements.txt'
       - 'setup.py'

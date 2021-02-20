@@ -9,11 +9,11 @@ OLDVER=$1
 NEWVER=$2
 
 FILELIST="setup.py
-	  ncbimeta/NCBImeta.py
-	  ncbimeta/NCBImetaAnnotateConcatenate.py
-	  ncbimeta/NCBImetaAnnotateReplace.py
-	  ncbimeta/NCBImetaExport.py
-	  ncbimeta/NCBImetaJoin.py"
+	  ncbimeta/NCBImeta
+	  ncbimeta/NCBImetaAnnotateConcatenate
+	  ncbimeta/NCBImetaAnnotateReplace
+	  ncbimeta/NCBImetaExport
+	  ncbimeta/NCBImetaJoin"
 
 for file in `ls $FILELIST`;
 do

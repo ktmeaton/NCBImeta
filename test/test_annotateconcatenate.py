@@ -29,7 +29,7 @@ def test_annotateconcatenate_run():
         test_ncbimeta.test_ncbimeta_run()
     test_table = "BioSample"
     test_cmd = (
-        "ncbimeta/NCBImetaAnnotateConcatenate.py --database "
+        "ncbimeta/NCBImetaAnnotateConcatenate --database "
         + test_db
         + " --table  "
         + test_table

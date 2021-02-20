@@ -45,10 +45,10 @@ setuptools.setup(
         ]
     },
     scripts=[
-        "ncbimeta/NCBImeta.py",
-        "ncbimeta/NCBImetaExport.py",
-        "ncbimeta/NCBImetaJoin.py",
-        "ncbimeta/NCBImetaAnnotateReplace.py",
-        "ncbimeta/NCBImetaAnnotateConcatenate.py",
+        "ncbimeta/NCBImeta",
+        "ncbimeta/NCBImetaExport",
+        "ncbimeta/NCBImetaJoin",
+        "ncbimeta/NCBImetaAnnotateReplace",
+        "ncbimeta/NCBImetaAnnotateConcatenate",
     ],
 )

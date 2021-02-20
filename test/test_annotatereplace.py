@@ -29,7 +29,7 @@ def test_annotatereplace_run():
         test_ncbimeta.test_ncbimeta_run()
     test_table = "BioSample"
     test_cmd = (
-        "ncbimeta/NCBImetaAnnotateReplace.py --database "
+        "ncbimeta/NCBImetaAnnotateReplace --database "
         + test_db
         + " --table  "
         + test_table

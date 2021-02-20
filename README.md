@@ -49,13 +49,13 @@ pip install .
 Test that the installation was successful:
 
 ```bash
-NCBImeta.py --version
+NCBImeta --version
 ```
 
 ## Command-Line Parameters
 
 ```text
-usage: NCBImeta.py [-h] --config CONFIGPATH [--flat] [--version]
+usage: NCBImeta [-h] --config CONFIGPATH [--flat] [--version]
                    [--email USEREMAIL] [--api USERAPI]
                    [--force-pause-seconds USERFORCEPAUSESECONDS]
 
@@ -90,7 +90,7 @@ cd NCBImeta
 Download a selection of genomic metadata pertaining to the plague pathogen *Yersinia pestis*.
 
 ```bash
-NCBImeta.py --flat --config example/config.yaml
+NCBImeta --flat --config example/config.yaml
 ```
 
 (Note: The 'quick' start config file forces slow downloads to accommodate users with slow internet. For faster record retrieval, please see the [Config File README](https://github.com/ktmeaton/NCBImeta/blob/master/config/README_config.md) to start editing config files.)
@@ -101,21 +101,21 @@ Example output of the command-line interface (v0.6.1):
 ### Annotate the database with the user's custom metadata
 
 ```bash
-NCBImetaAnnotateReplace.py --database example/yersinia_pestis_db.sqlite --annotfile example/annot.txt --table BioSample
+NCBImetaAnnotateReplace --database example/yersinia_pestis_db.sqlite --annotfile example/annot.txt --table BioSample
 ```
 
 Note that the first column of your annotation file MUST be a column that is unique to each record. An Accession number or ID is highly recommended. The column headers in your annotation file must also exactly match the names of your columns in the database.
 
-```NCBImetaAnnotateReplace.py```, as the name implies, replaces the existing annotation with the data in your custom metadata file. Alternatively, the script ```NCBImetaAnnotateConcatenate.py``` will concatenate your custom metadata with the pre-existing value in the database cell (separated by a semi-colon).
+```NCBImetaAnnotateReplace```, as the name implies, replaces the existing annotation with the data in your custom metadata file. Alternatively, the script ```NCBImetaAnnotateConcatenate``` will concatenate your custom metadata with the pre-existing value in the database cell (separated by a semi-colon).
 
 ```bash
-NCBImetaAnnotateConcatenate.py --database example/yersinia_pestis_db.sqlite --annotfile example/annot.txt --table BioSample
+NCBImetaAnnotateConcatenate --database example/yersinia_pestis_db.sqlite --annotfile example/annot.txt --table BioSample
 ```
 
 ### Join NCBI tables into a unified master table
 
 ```bash
-NCBImetaJoin.py --database example/yersinia_pestis_db.sqlite --final Master --anchor BioSample --accessory "BioProject Assembly SRA Nucleotide" --unique "BioSampleAccession BioSampleAccessionSecondary BioSampleBioProjectAccession"
+NCBImetaJoin --database example/yersinia_pestis_db.sqlite --final Master --anchor BioSample --accessory "BioProject Assembly SRA Nucleotide" --unique "BioSampleAccession BioSampleAccessionSecondary BioSampleBioProjectAccession"
 ```
 
 The rows of the output "Master" table will be from the anchor table "BioSample", with additional columns added in from the accessory tables "BioProject", "Assembly", "SRA", and "Nucleotide". Unique accession numbers for BioSample (both primary and secondary) and BioProject allow this join to be unambiguous.
@@ -123,7 +123,7 @@ The rows of the output "Master" table will be from the anchor table "BioSample",
 ### Export the database to tab-separated text files by table.
 
 ```bash
-NCBImetaExport.py --database example/yersinia_pestis_db.sqlite --outputdir example/
+NCBImetaExport --database example/yersinia_pestis_db.sqlite --outputdir example/
 ```
 
 Each table within the database will be exported to its own tab-separated .txt file in the specified output directory.

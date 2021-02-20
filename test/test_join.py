@@ -33,7 +33,7 @@ def test_join_run():
         + "BioSampleBioProjectAccession'"
     )
     test_cmd = (
-        "ncbimeta/NCBImetaJoin.py --database "
+        "ncbimeta/NCBImetaJoin --database "
         + test_db
         + " --final "
         + test_final_table
@@ -63,7 +63,7 @@ def test_multi_match():
     test_accessory_table = "Nucleotide"
     test_unique_field = "BioProjectAccession"
     test_cmd = (
-        "ncbimeta/NCBImetaJoin.py --database "
+        "ncbimeta/NCBImetaJoin --database "
         + test_db
         + " --final "
         + test_final_table

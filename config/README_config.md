@@ -82,7 +82,7 @@ Test your queries in the web browser first before committing  ([NCBI Web Portal]
 
 Note that the table names must match exactly to TABLES and TABLE COLUMNS.
 
-\*Note that record retrieval is currently limited to 9999999 records per table. This can be changed locally in your program by searching for the first instance of "retmax" in the NCBImeta.py source file (ncbimeta/NCBImeta.py).
+\*Note that record retrieval is currently limited to 9999999 records per table. This can be changed locally in your program by searching for the first instance of "retmax" in the NCBImeta source file (ncbimeta/NCBImeta).
 
 ## 8) TABLE_COLUMNS
 

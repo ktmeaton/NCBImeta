@@ -156,10 +156,10 @@ To puzzle out additional xml criteria for your search query, search for the line
 
 And uncomment it (delete the \#  at the beginning).
 
-When NCBImeta.py is run now, it will print out the xml for each record. It is recommended to redirect this output to a file, example:
+When NCBImeta is run now, it will print out the xml for each record. It is recommended to redirect this output to a file, example:
 
 ```bash
-NCBImeta.py --config example/config.yaml > config_xml_output.txt
+NCBImeta --config example/config.yaml > config_xml_output.txt
 ```
 
 Also please read through <https://www-ncbi-nlm-nih-gov.libaccess.lib.mcmaster.ca/biosample/docs/attributes/> for the BioSample database attributes.

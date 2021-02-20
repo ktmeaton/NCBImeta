@@ -26,7 +26,7 @@ def test_export_run():
     if not os.path.exists(test_db):
         test_ncbimeta.test_ncbimeta_run()
     test_cmd = (
-        "ncbimeta/NCBImetaExport.py --database "
+        "ncbimeta/NCBImetaExport --database "
         + test_db
         + " --outputdir "
         + test_output_dir

@@ -9,7 +9,7 @@ on:
     paths:
       - '.github/workflows/build.yaml*'
       - 'example/*'
-      - 'ncbimeta/*.py'
+      - 'ncbimeta/*'
       - 'test/*'
       - 'requirements.txt'
       - 'setup.py'
@@ -39,7 +39,7 @@ jobs:
       - name: Build From Source
         run: |
           pip install .
-          NCBImeta.py --version
+          NCBImeta --version
   #----------------------------------------------------------------------------#
   # Mac OS Source Build and Install
   source_build_macos_py:
@@ -58,7 +58,7 @@ jobs:
       - name: Build From Source
         run: |
           pip install .
-          NCBImeta.py --version
+          NCBImeta --version
   #----------------------------------------------------------------------------#
   # Ubuntu Conda Install
   conda_build_ubuntu:
@@ -76,7 +76,7 @@ jobs:
         shell: bash -l {0}
         run: |
           mamba install -c bioconda ncbimeta
-          NCBImeta.py --version
+          NCBImeta --version
   #----------------------------------------------------------------------------#
   # MacOS Conda Install
   conda_build_macos:
@@ -94,7 +94,7 @@ jobs:
         shell: bash -l {0}
         run: |
           mamba install -c bioconda ncbimeta
-          NCBImeta.py --version
+          NCBImeta --version
   #----------------------------------------------------------------------------#
   # PyPI Repository Install
   pypi_build_ubuntu_py:
@@ -113,4 +113,4 @@ jobs:
       - name: Install Main
         run: |
           pip install ncbimeta
-          NCBImeta.py --version
+          NCBImeta --version
