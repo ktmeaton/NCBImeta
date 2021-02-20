@@ -20,6 +20,9 @@ jobs:
           lfs: true
           fetch-depth: 0
 
+      - name: Update submodules
+        run: git submodule update --init --recursive
+
       # Check 2 most recent tags, overwrites
       - name: Tagged Release Notes
         run: |
