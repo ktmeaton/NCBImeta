@@ -11,7 +11,7 @@ on:
       - '.github/workflows/example.yaml*'
       - 'ncbimeta/*'
       - 'example/*'
-      - 'requirements.py'
+      - 'requirements.txt'
       - 'setup.py'
   pull_request:
     branches:
