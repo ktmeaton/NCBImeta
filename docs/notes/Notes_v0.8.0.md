@@ -1,6 +1,6 @@
-# Development
+# v0.8.0
 
-1. Start new dev branch for v0.7.1.
+1. Start new dev branch.
 1. Update miniconda actions and use mamba.
 1. Update lxml for security vulnerability.
 1. Add autologs as a submodule.
