@@ -117,6 +117,8 @@ def test_export_biosamplevalues(biosample_table_data):
         value = test_metadata_list[i]
         test_dict[key] = value
     # Test whether the values are as expected
+    print(test_dict)
+    print(biosample_table_data)
     assert test_dict == biosample_table_data
     # Cleanup
     test_file.close()

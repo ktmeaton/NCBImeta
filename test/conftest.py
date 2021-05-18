@@ -125,7 +125,7 @@ def biosample_table_data():
         "SRS5502739",
         "TestOrganism1",
         "TestStrain1",
-        "2019-10-08T07:15:03.953",
+        "2019-10-08T07:15:03.950",
         "",
     ]
 
