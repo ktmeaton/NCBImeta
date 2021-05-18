@@ -4,21 +4,26 @@
 
 ### Commits
 
+* [```3d79271```](https://github.com/ktmeaton/NCBImeta/commit/3d79271) test numpy-1.19.5
+* [```3bbbe59```](https://github.com/ktmeaton/NCBImeta/commit/3bbbe59) bugfix in example workflow trigger
+* [```05d1960```](https://github.com/ktmeaton/NCBImeta/commit/05d1960) remove print statement
+* [```d302811```](https://github.com/ktmeaton/NCBImeta/commit/d302811) update dependencies lxml pyaml and numpy
+* [```d5eaf85```](https://github.com/ktmeaton/NCBImeta/commit/d5eaf85) fix bug in test_export biosample date
+* [```4a1d4a7```](https://github.com/ktmeaton/NCBImeta/commit/4a1d4a7) add python 3.9 to the testing matrix
+* [```31bfcaf```](https://github.com/ktmeaton/NCBImeta/commit/31bfcaf) update ver number to v0.8.1
+* [```4272d9e```](https://github.com/ktmeaton/NCBImeta/commit/4272d9e) update changelog for v0.8.0
+
 ## v0.8.0
 
 ### Notes
 
-1. Start new dev branch for v0.7.1.
+1. Start new dev branch.
 1. Update miniconda actions and use mamba.
 1. Update lxml for security vulnerability.
 1. Add autologs as a submodule.
 1. Create CHANGELOG with autologs.
 1. Simplify test config with less fields to check.
 1. Remove .py extension from executable scripts.
-
-### Pull Requests
-
-* [```pull/19```](https://github.com/ktmeaton/NCBImeta/pull/19) Security fix for lxml, autologs, and workflow overhaul
 
 ### Commits
 
@@ -60,11 +65,6 @@
 1. Updated Contributor's Guideline
 1. Remove Python 3.5 support because of incompatibility with black.
 1. Remove user email and API key from stdout.
-
-### Pull Requests
-
-* [```pull/16```](https://github.com/ktmeaton/NCBImeta/pull/16) Cli Params
-* [```pull/14```](https://github.com/ktmeaton/NCBImeta/pull/14) Typeerror
 
 ### Commits
 
@@ -124,10 +124,6 @@
 * [```9582d78```](https://github.com/ktmeaton/NCBImeta/commit/9582d78) make pypi install plain no ver
 
 ## v0.6.6
-
-### Pull Requests
-
-* [```pull/12```](https://github.com/ktmeaton/NCBImeta/pull/12) Contributors Guide Test
 
 ### Commits
 
@@ -331,10 +327,6 @@
 
 ## v0.6.5
 
-### Pull Requests
-
-* [```pull/9```](https://github.com/ktmeaton/NCBImeta/pull/9) Add ability to use XPath queries from within the .yaml config
-
 ### Commits
 
 * [```ccfabe3```](https://github.com/ktmeaton/NCBImeta/commit/ccfabe3) Merge branch 'master' into dev
@@ -459,10 +451,6 @@
 * [```cb49712```](https://github.com/ktmeaton/NCBImeta/commit/cb49712) Document the bioconda repo master branch switch
 
 ## v0.6.2
-
-### Pull Requests
-
-* [```pull/5```](https://github.com/ktmeaton/NCBImeta/pull/5) Adding Bioconda as an installation option
 
 ### Commits
 
@@ -932,10 +920,6 @@
 * [```8cd4cbe```](https://github.com/ktmeaton/NCBImeta/commit/8cd4cbe) Encode rather than unicode, experiment
 
 ## v0.3.1
-
-### Pull Requests
-
-* [```pull/1```](https://github.com/ktmeaton/NCBImeta/pull/1) 1.1
 
 ### Commits
 
