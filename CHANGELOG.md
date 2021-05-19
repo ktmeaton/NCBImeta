@@ -2,8 +2,27 @@
 
 ## Development
 
+### Notes
+
 ### Commits
 
+## v0.8.1
+
+### Notes
+
+1. Add Python 3.9 Support.
+1. Bugfix the test export workflow.
+1. Update dependncies: lxml, PyYAML, NumPy
+1. Disable example workflow.
+
+### Commits
+
+* [```dab96e7```](https://github.com/ktmeaton/NCBImeta/commit/dab96e7) Merge pull request #22 from ktmeaton/dev
+* [```dcaca61```](https://github.com/ktmeaton/NCBImeta/commit/dcaca61) add python 3.9 to the install job of build
+* [```038d4f3```](https://github.com/ktmeaton/NCBImeta/commit/038d4f3) document example workflow disabled
+* [```6d491ac```](https://github.com/ktmeaton/NCBImeta/commit/6d491ac) relocate codecov config
+* [```2c798bc```](https://github.com/ktmeaton/NCBImeta/commit/2c798bc) add config file for codecov
+* [```e0d7920```](https://github.com/ktmeaton/NCBImeta/commit/e0d7920) update docs before PR
 * [```3d79271```](https://github.com/ktmeaton/NCBImeta/commit/3d79271) test numpy-1.19.5
 * [```3bbbe59```](https://github.com/ktmeaton/NCBImeta/commit/3bbbe59) bugfix in example workflow trigger
 * [```05d1960```](https://github.com/ktmeaton/NCBImeta/commit/05d1960) remove print statement
