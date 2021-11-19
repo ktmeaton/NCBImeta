@@ -29,7 +29,7 @@ There are three installation options for NCBImeta:
 ### 1. Bioconda
 
 ```bash
-conda install -c bioconda ncbimeta
+conda install -c conda-forge -c bioconda ncbimeta
 ```
 
 ### 2. PyPI
