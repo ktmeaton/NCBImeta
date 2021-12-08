@@ -54,7 +54,7 @@ parser.add_argument(
     dest="flatMode",
 )
 
-parser.add_argument("--version", action="version", version="%(prog)s v0.8.1")
+parser.add_argument("--version", action="version", version="%(prog)s v0.8.2")
 
 parser.add_argument(
     "--email",
@@ -104,74 +104,40 @@ with open(config_path) as config_file:
     if config_data is None:
         raise NCBImetaErrors.ErrorConfigYAMLFormat(config_file)
 
-# Retrieve configuration file values and error catching
-# Note this could be condensed and done with dynamic vars...
+# These are the parameters in the config file we need to error check
+config_params = [
+    "OUTPUT_DIR",
+    "EMAIL",
+    "API_KEY",
+    "FORCE_PAUSE_SECONDS",
+    "DATABASE",
+    "TABLES",
+    "SEARCH_TERMS",
+    "TABLE_COLUMNS",
+]
 
-# --- Output Directory ---#
-try:
-    CONFIG_OUTPUT_DIR = config_data["OUTPUT_DIR"]
-except KeyError:
-    raise NCBImetaErrors.ErrorConfigParameter("OUTPUT_DIR")
-if not CONFIG_OUTPUT_DIR:
-    raise NCBImetaErrors.ErrorConfigParameter("OUTPUT_DIR")
+# THese parameters can be overridden with CLI arguments
+override_params = ["EMAIL", "API_KEY", "FORCE_PAUSE_SECONDS"]
 
-# --- User Email ---#
-try:
-    CONFIG_EMAIL = config_data["EMAIL"]
-except KeyError:
-    raise NCBImetaErrors.ErrorConfigParameter("EMAIL")
-if not CONFIG_EMAIL:
-    raise NCBImetaErrors.ErrorConfigParameter("EMAIL")
-# Override if specified on command-line
+for param in config_params:
+    # If the parameter was missing the config file
+    if param not in config_data:
+        raise NCBImetaErrors.ErrorConfigParameter(param)
+
+    # If the parameter has empty data
+    if param not in override_params:
+        if not config_data[param]:
+            raise NCBImetaErrors.ErrorConfigParameter(param)
+
+
+# CLI override for sensitive information
 if user_email:
-    CONFIG_EMAIL = user_email
-# --- User API Key ---#
-try:
-    CONFIG_API_KEY = config_data["API_KEY"]
-except KeyError:
-    raise NCBImetaErrors.ErrorConfigParameter("API_KEY")
-# Override if specified on command-line
+    config_data["EMAIL"] = user_email
 if user_api:
-    CONFIG_API_KEY = user_api
-# --- Force pausing in between record fetching ---#
-try:
-    CONFIG_FORCE_PAUSE_SECONDS = config_data["FORCE_PAUSE_SECONDS"]
-except KeyError:
-    raise NCBImetaErrors.ErrorConfigParameter("FORCE_PAUSE_SECONDS")
-if CONFIG_FORCE_PAUSE_SECONDS is None:
-    raise NCBImetaErrors.ErrorConfigParameter("FORCE_PAUSE_SECONDS")
-# Override if specified on command-line
+    config_data["API_KEY"] = user_api
 if user_force_pause_seconds:
-    CONFIG_FORCE_PAUSE_SECONDS = float(user_force_pause_seconds)
-# --- Database file name---#
-try:
-    CONFIG_DATABASE = config_data["DATABASE"]
-except KeyError:
-    raise NCBImetaErrors.ErrorConfigParameter("DATABASE")
-if not CONFIG_DATABASE:
-    raise NCBImetaErrors.ErrorConfigParameter("CONFIG_DATABASE")
+    config_data["FORCE_PAUSE_SECONDS"] = float(user_force_pause_seconds)
 
-# --- NCBI Tables to Search (list) ---#
-try:
-    CONFIG_TABLES = config_data["TABLES"]
-except KeyError:
-    raise NCBImetaErrors.ErrorConfigParameter("TABLES")
-if not CONFIG_TABLES:
-    raise NCBImetaErrors.ErrorConfigParameter("TABLES")
-# --- Search terms for each table (dict) ---#
-try:
-    CONFIG_SEARCH_TERMS = config_data["SEARCH_TERMS"]
-except KeyError:
-    raise NCBImetaErrors.ErrorConfigParameter("SEARCH_TERMS")
-if not CONFIG_SEARCH_TERMS:
-    raise NCBImetaErrors.ErrorConfigParameter("SEARCH_TERMS")
-# --- Table Columns/Metadata to retrieve (list of dict)---#
-try:
-    CONFIG_TABLE_COLUMNS = config_data["TABLE_COLUMNS"]
-except KeyError:
-    raise NCBImetaErrors.ErrorConfigParameter("TABLE_COLUMNS")
-if not CONFIG_TABLE_COLUMNS:
-    raise NCBImetaErrors.ErrorConfigParameter("TABLE_COLUMNS")
 
 # --- Print the retrieved config file parameters ---#
 print(
@@ -179,22 +145,22 @@ print(
     + "NCBImeta was run with the following options: \n\tConfig File: "
     + str(config_path)
     + "\n\tOutput Directory: "
-    + str(CONFIG_OUTPUT_DIR)
+    + str(config_data["OUTPUT_DIR"])
     + "\n\tUser Database: "
-    + str(CONFIG_DATABASE)
+    + str(config_data["DATABASE"])
     + "\n\tTables: "
-    + str(CONFIG_TABLES)
+    + str(config_data["TABLES"])
     + "\n\tSearch Terms: ",
     flush=True,
 )
 
-for table_search_term in CONFIG_SEARCH_TERMS:
+for table_search_term in config_data["SEARCH_TERMS"]:
     print("\t\t" + str(table_search_term), flush=True)
 print("\n", flush=True)
 
 # Check if output dir exists
-if not os.path.exists(CONFIG_OUTPUT_DIR):
-    os.makedirs(CONFIG_OUTPUT_DIR)
+if not os.path.exists(config_data["OUTPUT_DIR"]):
+    os.makedirs(config_data["OUTPUT_DIR"])
 
 # Flat mode checking
 if flat_mode:
@@ -202,8 +168,8 @@ if flat_mode:
         "Flat mode was requested, organizational directories will not be used.",
         flush=True,
     )
-    DB_DIR = os.path.join(CONFIG_OUTPUT_DIR, "")
-    LOG_PATH = CONFIG_OUTPUT_DIR
+    config_data["DB_DIR"] = os.path.join(config_data["OUTPUT_DIR"], "")
+    config_data["LOG_PATH"] = config_data["OUTPUT_DIR"]
 
 # Or Create accessory directory (ex. log, data, database, etc.)
 elif not flat_mode:
@@ -211,26 +177,28 @@ elif not flat_mode:
         "Flat mode was not requested, organization directories will be used.",
         flush=True,
     )
-    NCBImetaUtilities.check_accessory_dir(CONFIG_OUTPUT_DIR)
-    DB_DIR = os.path.join(CONFIG_OUTPUT_DIR, "", "database", "")
-    LOG_PATH = os.path.join(CONFIG_OUTPUT_DIR, "", "log")
+    NCBImetaUtilities.check_accessory_dir(config_data["OUTPUT_DIR"])
+    config_data["DB_DIR"] = os.path.join(config_data["OUTPUT_DIR"], "", "database", "")
+    config_data["LOG_PATH"] = os.path.join(config_data["OUTPUT_DIR"], "", "log")
 
 # Database path (depending on flat mode or not)
-DB_PATH = os.path.join(DB_DIR, "", CONFIG_DATABASE)
+config_data["DB_PATH"] = os.path.join(
+    config_data["DB_DIR"], "", config_data["DATABASE"]
+)
 
 # -----------------------------------------------------------------------------#
 #                       Database connection                                    #
 # -----------------------------------------------------------------------------#
-if not os.path.exists(DB_PATH):
-    print("\n" + "Creating database: " + DB_PATH, flush=True)
-    conn = sqlite3.connect(DB_PATH)
+if not os.path.exists(config_data["DB_PATH"]):
+    print("\n" + "Creating database: " + config_data["DB_PATH"], flush=True)
+    conn = sqlite3.connect(config_data["DB_PATH"])
     conn.commit()
-    print("\n" + "Connected to database: " + DB_PATH, flush=True)
+    print("\n" + "Connected to database: " + config_data["DB_PATH"], flush=True)
 
-elif os.path.exists(DB_PATH):
-    conn = sqlite3.connect(DB_PATH)
+elif os.path.exists(config_data["DB_PATH"]):
+    conn = sqlite3.connect(config_data["DB_PATH"])
     conn.commit()
-    print("\n" + "Connected to database: " + DB_PATH, flush=True)
+    print("\n" + "Connected to database: " + config_data["DB_PATH"], flush=True)
 
 # -----------------------------------------------------------------------------#
 #                      CONSTANTS and Config                                    #
@@ -305,7 +273,6 @@ def UpdateDB(
     db_dir(str): Path to the directory where the database is stored in.
     force_pause_seconds(float): Time wait in between fetch read_attempts.
     """
-
     print(
         "\nCreating/Updating the "
         + table
@@ -332,7 +299,9 @@ def UpdateDB(
     # -------------------------------------------------------------------------#
     # Name of Log File
     log_file_path = os.path.join(
-        LOG_PATH, "", os.path.splitext(database)[0] + "_" + table + ".log"
+        config_data["LOG_PATH"],
+        "",
+        os.path.splitext(database)[0] + "_" + table + ".log",
     )
 
     # Check if the file already exists, either write or append to it.
@@ -609,27 +578,23 @@ def UpdateDB(
 # -----------------------------------------------------------------------------#
 #                     Iterate Through Tables in Config File                    #
 # -----------------------------------------------------------------------------#
-for table in CONFIG_TABLES:
-    OUTPUT_DIR = CONFIG_OUTPUT_DIR
-    DATABASE = CONFIG_DATABASE
-    EMAIL = CONFIG_EMAIL
+for table in config_data["TABLES"]:
     # Since API can be empty, force it to empty string for printing
-    API_KEY = CONFIG_API_KEY
-    if not API_KEY:
-        API_KEY = ""
-    FORCE_PAUSE_SECONDS = CONFIG_FORCE_PAUSE_SECONDS
+    if not config_data["API_KEY"]:
+        config_data["API_KEY"] = ""
+
     # Config search terms, match table to table name
-    for _index, search_term_table in enumerate(CONFIG_SEARCH_TERMS):
+    for _index, search_term_table in enumerate(config_data["SEARCH_TERMS"]):
         table_name = list(search_term_table)[0]
         if table_name == table:
             break
-    SEARCH_TERM = CONFIG_SEARCH_TERMS[_index][table]
+    SEARCH_TERM = config_data["SEARCH_TERMS"][_index][table]
     # Table columns, match table to table name
-    for _index, table_column_dict in enumerate(CONFIG_TABLE_COLUMNS):
+    for _index, table_column_dict in enumerate(config_data["TABLE_COLUMNS"]):
         table_name = list(table_column_dict)[0]
         if table_name == table:
             break
-    TABLE_COLUMNS = CONFIG_TABLE_COLUMNS[_index][table]
+    TABLE_COLUMNS = config_data["TABLE_COLUMNS"][_index][table]
 
     # Check for duplicate column names
     # -- Note this is only PER TABLE (Checking for duplicate between table
@@ -646,13 +611,13 @@ for table in CONFIG_TABLES:
     # Call the main database updating function
     UpdateDB(
         table,
-        OUTPUT_DIR,
-        DATABASE,
-        EMAIL,
+        config_data["OUTPUT_DIR"],
+        config_data["DATABASE"],
+        config_data["EMAIL"],
         SEARCH_TERM,
         TABLE_COLUMNS,
-        LOG_PATH,
-        DB_DIR,
-        API_KEY,
-        FORCE_PAUSE_SECONDS,
+        config_data["LOG_PATH"],
+        config_data["DB_DIR"],
+        config_data["API_KEY"],
+        config_data["FORCE_PAUSE_SECONDS"],
     )
