@@ -111,11 +111,13 @@ Note that the first column of your annotation file MUST be a column that is uniq
 
 `NCBImetaAnnotate` by default replaces the existing annotation with the data in your custom metadata file. Alternatively, the flag `--concatenate` can be specified. This will concatenate your custom metadata with the pre-existing value in the database cell (separated by a semi-colon).
 
+```bash
 NCBImetaAnnotate \
   --database test/test.sqlite \
   --annotfile test/test_annot.txt \
   --table BioSample \
   --concatenate
+```
 
 ### Join NCBI tables into a unified master table
 
