@@ -1,0 +1,54 @@
+# User Configuration Variables
+OUTPUT_DIR : ncov_canada
+EMAIL : myusername@domain.com
+API_KEY :
+FORCE_PAUSE_SECONDS : 1
+DATABASE : ncov_canada.sqlite
+
+# NCBI Tables to Query
+TABLES :
+  - BioSample
+
+# Query Terms to Use
+SEARCH_TERMS :
+  - BioSample : "Severe acute respiratory syndrome coronavirus 2[Organism] \
+                AND Canada[All Fields] \
+                AND biosample sra[filter] \
+                AND attribute collection date[filter] \
+                AND attribute geographic location[filter]"
+
+# Columns of the database (ie. metadata fields to retrieve)
+TABLE_COLUMNS :
+
+  - BioSample :
+    - BioSampleAccession: BioSample, accession
+    - BioSampleAccessionSecondary: NullValue
+    - BioSampleBioProjectAccession: XPATH, //Links/Link[@target='bioproject']/@label
+    - BioSampleSRAAccession: Id, db, SRA
+    - BioSampleTitle: Title
+    - BioSampleName: Id, db_label, Sample name
+    - BioSampleType: Attribute, harmonized_name, sample_type
+    - BioSamplePackage: Package
+    - BioSampleInfraspecies: Infraspecies
+    - BioSampleOrganism: Description, OrganismName
+    - BioSampleOrganismAlt: Description, Organism, taxonomy_name
+    - BioSampleSubSpecies: Attribute, harmonized_name, sub_species
+    - BioSampleStrain: Attribute, harmonized_name, strain
+    - BioSampleTaxonomyID: Organism, taxonomy_id
+    - BioSampleBiovar: Attribute, harmonized_name, biovar
+    - BioSampleSerovar: Attribute, harmonized_name, serovar
+    - BioSampleCollectionDate: Attribute, harmonized_name, collection_date
+    - BioSampleGeographicLocation: Attribute, harmonized_name, geo_loc_name
+    - BioSampleHost: Attribute, harmonized_name, host
+    - BioSampleHostDisease : Attribute, harmonized_name, host_disease
+    - BioSampleHostHealthState : Attribute, harmonized_name, host_health_state
+    - BioSampleIsolateNameAlias: Attribute, harmonized_name, isolate_name_alias
+    - BioSampleIsolationSource: Attribute, harmonized_name, isolation_source
+    - BioSampleLat : Attribute, attribute_name, Latitude
+    - BioSampleLatLon : Attribute, harmonized_name, lat_lon
+    - BioSampleLon : Attribute, attribute_name, Longitude
+    - BioSampleSubmissionDate: BioSample, submission_date
+    - BioSampleModificationDate: BioSample, last_update
+    - BioSamplePublicationDate: BioSample, publication_date
+    - BioSampleOrganization: Owner, Name
+    - BioSampleComment : NullValue
