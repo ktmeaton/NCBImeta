@@ -9,7 +9,6 @@ on:
       - 'dev'
     paths:
       - '.github/workflows/build.yaml*'
-      - 'example/*'
       - 'ncbimeta/*'
       - 'test/*'
       - 'requirements.txt'

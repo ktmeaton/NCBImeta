@@ -10,7 +10,7 @@ on:
     paths:
       - '.github/workflows/example.yaml*'
       - 'ncbimeta/*'
-      - 'example/*'
+      - 'test/*'
       - 'requirements.txt'
       - 'setup.py'
   pull_request:
@@ -45,8 +45,8 @@ jobs:
 
       - name: Quick Start Example
         run: |
-          NCBImeta --flat --config example/config.yaml --force-pause-seconds 0 --email ${{ secrets.NCBI_EMAIL }} --api ${{ secrets.NCBI_API_KEY }}
-          NCBImetaAnnotateReplace --database example/yersinia_pestis_db.sqlite --annotfile example/annot.txt --table BioSample
-          NCBImetaAnnotateConcatenate --database example/yersinia_pestis_db.sqlite --annotfile example/annot.txt --table BioSample
-          NCBImetaJoin --database example/yersinia_pestis_db.sqlite --anchor BioSample --accessory "BioProject Assembly SRA Nucleotide" --final Master --unique "BioSampleAccession BioSampleAccessionSecondary BioSampleBioProjectAccession"
-          NCBImetaExport --database example/yersinia_pestis_db.sqlite --outputdir example/
+          NCBImeta --flat --config test/test.yaml --force-pause-seconds 0 --email ${{ secrets.NCBI_EMAIL }} --api ${{ secrets.NCBI_API_KEY }}
+          NCBImetaAnnotate --database test/test.sqlite --annotfile test/test_annot.txt --table BioSample
+          NCBImetaAnnotate --database test/test.sqlite --annotfile test/test_annot.txt --table BioSample --concatenate
+          NCBImetaJoin --database test/test.sqlite --anchor BioSample --accessory "BioProject Assembly SRA Nucleotide" --final Master --unique "BioSampleAccession BioSampleAccessionSecondary BioSampleBioProjectAccession"
+          NCBImetaExport --database test/test.sqlite --outputdir test/
