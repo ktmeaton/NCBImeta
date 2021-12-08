@@ -18,6 +18,8 @@ on:
       - ncbimeta/*
       - test/*.py
       - '.pre-commit-config.yaml'
+      - 'requirements.txt'
+      - 'setup.py'
   pull_request:
     branches:
       - '*'
