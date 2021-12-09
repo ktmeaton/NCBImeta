@@ -162,10 +162,10 @@ Example database output (a subset of the BioSample table)
 * SRA
 * Pubmed
 
-## Upcoming Features
+## Recent and Upcoming Features
 
-* [Project v0.6.6 - "PyPI Fix and Contributor's Guide"](https://github.com/ktmeaton/NCBImeta/projects/8): Deployment and Linting - RELEASED
-* [Project v0.7.0 - "Strict Version Control"](https://github.com/ktmeaton/NCBImeta/projects/9): Version Control All Dependencies - DEV
+* Project v0.8.1 - "Python 3.9 Support": Add Support for Python 3.9 - RELEASED
+* [Project v0.8.2 - "Annotate Simplicity"](https://github.com/ktmeaton/NCBImeta/projects/12): Simplify the Annotate Command - DEV
 * [Project "Read The Docs"](https://github.com/ktmeaton/NCBImeta/projects/7): Documentation Overhaul - PLANNED
 
 ## Documentation
