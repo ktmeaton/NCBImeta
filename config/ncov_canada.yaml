@@ -1,5 +1,5 @@
 # User Configuration Variables
-OUTPUT_DIR : ncov_canada
+OUTPUT_DIR : database/ncov_canada
 EMAIL : myusername@domain.com
 API_KEY :
 FORCE_PAUSE_SECONDS : 1

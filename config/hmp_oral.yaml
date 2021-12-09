@@ -1,5 +1,5 @@
 # User Configuration Variables
-OUTPUT_DIR : hmp_oral
+OUTPUT_DIR : database/hmp_oral
 EMAIL : myusername@domain.com
 API_KEY :
 FORCE_PAUSE_SECONDS : 1
