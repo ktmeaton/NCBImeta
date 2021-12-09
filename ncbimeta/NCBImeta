@@ -80,6 +80,15 @@ parser.add_argument(
     dest="userForcePauseSeconds",
 )
 
+parser.add_argument(
+    "--quiet",
+    help="Suppress logging of each record to the console.",
+    action="store_true",
+    required=False,
+    dest="quiet",
+)
+
+
 # Retrieve user parameters
 args = vars(parser.parse_args())
 
@@ -88,6 +97,7 @@ flat_mode = args["flatMode"]
 user_email = args["userEmail"]
 user_api = args["userAPI"]
 user_force_pause_seconds = args["userForcePauseSeconds"]
+quiet_mode = args["quiet"]
 
 
 # -----------------------------------------------------------------------------#
@@ -389,11 +399,12 @@ def UpdateDB(
         # -------------------Progress Log and Entry Counter--------------------#
         # Increment entry counter and record progress to screen
         num_processed += 1
-        print("ID: " + ID, flush=True)
-        print(
-            "Processing record: " + str(num_processed) + "/" + str(num_records),
-            flush=True,
-        )
+        if not quiet_mode:
+            print("ID: " + ID, flush=True)
+            print(
+                "Processing record: " + str(num_processed) + "/" + str(num_records),
+                flush=True,
+            )
 
         # ------------Check if Record Already Exists in Database---------------#
         sql_query = (
