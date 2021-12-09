@@ -6,6 +6,11 @@
 
 ### Commits
 
+## v0.8.2
+
+### Commits
+
+* [```d040d1ce```](https://github.com/ktmeaton/NCBImeta/commit/d040d1ce) update README and CHANGELOG
 * [```79a35353```](https://github.com/ktmeaton/NCBImeta/commit/79a35353) re add autolots as submodule
 * [```e1712b86```](https://github.com/ktmeaton/NCBImeta/commit/e1712b86) remove autologs
 * [```372589b2```](https://github.com/ktmeaton/NCBImeta/commit/372589b2) change config outputs to database dir
