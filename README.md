@@ -72,6 +72,7 @@ optional arguments:
   --force-pause-seconds USERFORCEPAUSESECONDS
                         FORCE PAUSE SECONDS to override parameter in config
                         file.
+  --quiet               Suppress logging of each record to the console.  
 ```
 
 ## Quick Start Example

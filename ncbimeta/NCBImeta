@@ -38,7 +38,7 @@ parser = argparse.ArgumentParser(
 # Argument groups for the program
 mandatory_parser = parser.add_argument_group("mandatory")
 
-parser.add_argument(
+mandatory_parser.add_argument(
     "--config",
     help="Path to the yaml configuration file (ex. config.yaml).",
     action="store",
