@@ -8,14 +8,21 @@ DATABASE : ncov_canada.sqlite
 # NCBI Tables to Query
 TABLES :
   - BioSample
+  - BioProject
+  - SRA
 
 # Query Terms to Use
 SEARCH_TERMS :
   - BioSample : "Severe acute respiratory syndrome coronavirus 2[Organism] \
-                AND Canada[All Fields] \
+                AND Canada \
                 AND biosample sra[filter] \
                 AND attribute collection date[filter] \
                 AND attribute geographic location[filter]"
+  - BioProject : "Severe acute respiratory syndrome coronavirus 2[Organism] \
+                AND Canada \
+                AND bioproject sra[Filter]"
+  - SRA : "Severe acute respiratory syndrome coronavirus 2[Organism] \
+                AND Canada"
 
 # Columns of the database (ie. metadata fields to retrieve)
 TABLE_COLUMNS :
@@ -27,22 +34,29 @@ TABLE_COLUMNS :
     - BioSampleSRAAccession: Id, db, SRA
     - BioSampleTitle: Title
     - BioSampleName: Id, db_label, Sample name
-    - BioSampleType: Attribute, harmonized_name, sample_type
     - BioSamplePackage: Package
-    - BioSampleInfraspecies: Infraspecies
     - BioSampleOrganism: Description, OrganismName
     - BioSampleOrganismAlt: Description, Organism, taxonomy_name
-    - BioSampleSubSpecies: Attribute, harmonized_name, sub_species
-    - BioSampleStrain: Attribute, harmonized_name, strain
     - BioSampleTaxonomyID: Organism, taxonomy_id
-    - BioSampleBiovar: Attribute, harmonized_name, biovar
-    - BioSampleSerovar: Attribute, harmonized_name, serovar
+    - BioSampleIsolate: Attribute, harmonized_name, isolate
+    - BioSampleCollectedBy: Attribute, harmonized_name, collected_by
     - BioSampleCollectionDate: Attribute, harmonized_name, collection_date
     - BioSampleGeographicLocation: Attribute, harmonized_name, geo_loc_name
     - BioSampleHost: Attribute, harmonized_name, host
     - BioSampleHostDisease : Attribute, harmonized_name, host_disease
-    - BioSampleHostHealthState : Attribute, harmonized_name, host_health_state
-    - BioSampleIsolateNameAlias: Attribute, harmonized_name, isolate_name_alias
+    - BioSampleHostAge : Attribute, harmonized_name, host_age
+    - BioSampleHostAgeUnit : Attribute, attribute_name, host_age_unit
+    - BioSampleHostSex : Attribute, harmonized_name, host_sex
+    - BioSampleHostAnatomicalPart : Attribute, harmonized_name, host_anatomical_part
+    - BioSamplePassageHistory : Attribute, harmonized_name, passage_history
+    - BioSampleGISAIDAccession : Attribute, harmonized_name, gisaid_accession
+    - BioSampleGISAIDVirusName : Attribute, harmonized_name, gisaid_virus_name
+    - BioSampleSequencedBy : Attribute, harmonized_name, sequenced_by
+    - BioSamplePurposeSampling : Attribute, harmonized_name, purpose_of_sampling
+    - BioSamplePurposeSequencing : Attribute, harmonized_name, purpose_of_sequencing
+    - BioSampleCollectionDevice : Attribute, harmonized_name, collection_device
+    - BioSampleDiagGeneName : Attribute, harmonized_name, sars_cov_2_diag_gene_name_1
+    - BioSamplePCRCtValue : Attribute, harmonized_name, sars_cov_2_diag_pcr_ct_value_1
     - BioSampleIsolationSource: Attribute, harmonized_name, isolation_source
     - BioSampleLat : Attribute, attribute_name, Latitude
     - BioSampleLatLon : Attribute, harmonized_name, lat_lon
@@ -52,3 +66,67 @@ TABLE_COLUMNS :
     - BioSamplePublicationDate: BioSample, publication_date
     - BioSampleOrganization: Owner, Name
     - BioSampleComment : NullValue
+
+  - BioProject :
+    - BioProjectAccession : ArchiveID, accession
+    - BioProjectDataType : ProjectDataTypeSet, DataType
+    - BioProjectDescription : ProjectDescr, Description
+    - BioProjectMethodType : Method, method_type
+    - BioProjectName : ProjectDescr, Name
+    - BioProjectTargetCapture : Target, capture
+    - BioProjectTargetMaterial : Target, material
+    - BioProjectTargetScope : Target, sample_scope
+    - BioProjectTitle : XPATH, //ProjectDescr/Title/text()
+    - BioProjectOrganismLabel : ProjectTypeSubmission, Label
+    - BioProjectOrganismStrain : ProjectTypeSubmission, Strain
+    - BioProjectOrganismTaxID : ProjectTypeSubmission, Organism, taxID
+    - BioProjectSpeciesTaxID : ProjectTypeSubmission, Organism, species
+    - BioProjectSupergroup : ProjectTypeSubmission, Supergroup
+    - BioProjectRegistrationDate : Submission, submitted
+    - BioProjectReleaseDate: ProjectReleaseDate
+    - BioProjectModificationDate: Submission, last_update
+    - BioProjectRelevanceMedical : Relevance, Medical
+    - BioProjectSubmitterOrganization : Organization, Name
+    - BioProjectPublished: Publication, status
+    - BioProjectDatePublished: Publication, date
+    - BioProjectPublicationID: Publication, id
+    - BioProjectPublicationDB: Publication, DbType
+    - BioProjectComment : NullValue
+
+  - SRA :
+      - SRABioProjectAccession : STUDY, EXTERNAL_ID, namespace, BioProject
+      - SRABioSampleAccession : RUN_SET, RUN, Pool, EXTERNAL_ID, namespace, BioSample
+      - SRASampleAccession : SAMPLE_DESCRIPTOR, accession
+      - SRASampleName : SAMPLE, alias
+      - SRAExperimentAccession : EXPERIMENT, accession
+      - SRAExperimentName : EXPERIMENT, alias
+      - SRARunAccession : RUN, accession
+      - SRARunName : RUN, alias
+      - SRAIsPublic : RUN, is_public
+      - SRAStaticDataAvailable : RUN, static_data_available
+      - SRAStudyAcc : STUDY, accession
+      - SRAStudyName : STUDY_TITLE
+      - SRAStudyAbstract: STUDY_ABSTRACT
+      - SRAOrganismName : SAMPLE_NAME, SCIENTIFIC_NAME
+      - SRAOrganismTaxID : SAMPLE, TAXON_ID
+      - SRAClusterName : RUN, cluster_name
+      - SRAPlatform : PLATFORM
+      - SRAInstrumentModel : PLATFORM, INSTRUMENT_MODEL
+      - SRALibraryName : LIBRARY_NAME
+      - SRALibraryLayout : LIBRARY_LAYOUT
+      - SRALibrarySelection : LIBRARY_SELECTION
+      - SRALibrarySource : LIBRARY_SOURCE
+      - SRALibraryStrategy : LIBRARY_STRATEGY
+      - SRATotalBases : RUN_SET, RUN, total_bases
+      - SRATotalSize : RUN_SET, RUN, size
+      - SRATotalSpots : RUN_SET, RUN, total_spots
+      - SRAFileUrl : SRAFile, url
+      - SRAFileName : SRAFile, filename
+      - SRAFileSize : SRAFile, size
+      - SRAFileType : SRAFile, semantic_name
+      - SRARunPublishDate : RUN_SET, RUN, published
+      - SRACenterName : SUBMISSION, center_name
+      - SRAContactEmail : Organization, Contact, email
+      - SRALabName : SUBMISSION, lab_name
+      - SRASubmitterAccession : SUBMISSION, accession
+      - SRAComment : NullValue
