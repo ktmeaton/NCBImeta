@@ -28,6 +28,8 @@ There are three installation options for NCBImeta:
 
 ### 1. Bioconda
 
+> **Note**: conda install is temporarily unavailable due to recent changes in the `lxml` package.
+
 ```bash
 conda install -c conda-forge -c bioconda ncbimeta
 ```
