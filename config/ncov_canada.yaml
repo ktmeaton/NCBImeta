@@ -13,7 +13,7 @@ TABLES :
 
 # Query Terms to Use
 SEARCH_TERMS :
-  - BioSample : "Severe acute respiratory syndrome coronavirus 2[Organism] \
+  - BioSample : "(Severe acute respiratory syndrome coronavirus 2[Organism] OR SARS-CoV-2) \
                 AND Canada \
                 AND biosample sra[filter] \
                 AND attribute collection date[filter] \
