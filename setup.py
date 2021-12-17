@@ -13,7 +13,7 @@ setuptools.setup(
         "Efficient and comprehensive metadata acquisition "
         "from the NCBI databases (includes SRA)."
     ),
-    python_requires=">=3.6",
+    python_requires=">=3.8",
     license="MIT",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -29,16 +29,16 @@ setuptools.setup(
     install_requires=require_list,  # external packages as dependencies
     extras_require={
         "dev": [
-            "coverage==4.5.4",
-            "codecov==2.0.15",
-            "pytest==5.3.1",
-            "pytest-cov==2.8.1",
-            "check-manifest==0.42",
-            "twine==3.2.0",
-            "pre-commit<=2.6.0",
-            "flake8==3.8.3",
-            "flake8-bugbear==20.1.4",
-            "black==19.10b0",
+            "coverage",
+            "codecov",
+            "pytest",
+            "pytest-cov",
+            "check-manifest",
+            "twine",
+            "pre-commit",
+            "flake8",
+            "flake8-bugbear",
+            "black",
         ]
     },
     scripts=[
