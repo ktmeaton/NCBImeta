@@ -54,7 +54,7 @@ parser.add_argument(
     dest="flatMode",
 )
 
-parser.add_argument("--version", action="version", version="%(prog)s v0.8.2")
+parser.add_argument("--version", action="version", version="%(prog)s v0.8.3dev")
 
 parser.add_argument(
     "--email",
@@ -88,6 +88,14 @@ parser.add_argument(
     dest="quiet",
 )
 
+parser.add_argument(
+    "--debug",
+    help="Enable debugging mode.",
+    action="store_true",
+    required=False,
+    dest="debug",
+)
+
 
 # Retrieve user parameters
 args = vars(parser.parse_args())
@@ -98,7 +106,7 @@ user_email = args["userEmail"]
 user_api = args["userAPI"]
 user_force_pause_seconds = args["userForcePauseSeconds"]
 quiet_mode = args["quiet"]
-
+debug_mode = args["debug"]
 
 # -----------------------------------------------------------------------------#
 #                            Error Catching                                    #
@@ -467,7 +475,8 @@ def UpdateDB(
         #                         NCBI Record Parsing                          #
         # ---------------------------------------------------------------------#
 
-        # print(etree.tostring(ID_root).decode())
+        if debug_mode:
+            print(etree.tostring(ID_root).decode())
 
         column_dict = {}
         # Add ID to the dictionary
@@ -497,7 +506,11 @@ def UpdateDB(
                     raise NCBImetaErrors.ErrorXPathQueryMissing(column_name)
                 column_payload_xpath = column_payload[0]
                 NCBImetaUtilities.adv_xml_search(
-                    working_root, column_payload_xpath, column_name, column_dict
+                    working_root,
+                    column_payload_xpath,
+                    column_name,
+                    column_dict,
+                    debug_mode=debug_mode,
                 )
             else:
                 # If there's special characters this query shouldn't be used for xpath

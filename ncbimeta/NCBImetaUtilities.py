@@ -47,7 +47,7 @@ def table_exists(db_cur, table_name):
     return db_cur.execute(query).fetchone() is not None
 
 
-def adv_xml_search(xml_root, targ_xpath, column_name, xml_dict):
+def adv_xml_search(xml_root, targ_xpath, column_name, xml_dict, debug_mode=False):
     """
     Search xml_root using targ_xpath query, assign to column name in xml_dict.
     Contributor: @ktmeaton, @hellothisisMatt
@@ -62,6 +62,9 @@ def adv_xml_search(xml_root, targ_xpath, column_name, xml_dict):
     Void. Instead the function mutates the dictionary xml_dict.
     """
     results = xml_root.xpath(targ_xpath)
+    if debug_mode:
+        print(targ_xpath)
+        print("\t", results)
 
     for result in results:
         # Lets figure out the returned element from our XPath query.
