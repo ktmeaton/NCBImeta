@@ -27,6 +27,9 @@
 
     ```bash
     pip install .[dev]
+
+    # Or if using WSL
+    pip install ".[dev]"
     ```
 
 1. **Install pre-commit hooks for linting and miscellaneous formatting. Check to make sure all files lint before beginning your contribution.**
@@ -53,11 +56,12 @@
       test/test_errors.py \
       test/test_utilities.py \
       test/test_ncbimeta.py \
-      test/test_annotateconcatenate.py \
-      test/test_annotatereplace.py \
+      test/test_annotate.py \
       test/test_join.py \
       test/test_export.py
     ```
+
+    - Inspect the output html report.
 
 1. **Add the changed files to your local repository and commit them.**
 

@@ -40,7 +40,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.7'
+          python-version: '3.9'
       - name: Install pre-commit with dev mode
         run: |
           pip install .[dev]
@@ -77,11 +77,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       #------------------------------------------------------------------------#
-      # Setup python, configure to 3.7 for black
+      # Setup python, configure to 3.9 for black
       - name: Set up python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.7'
+          python-version: '3.9'
       #------------------------------------------------------------------------#
       # Install dependencies
       - name: Install linters
