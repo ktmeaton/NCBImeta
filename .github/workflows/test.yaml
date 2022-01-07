@@ -28,7 +28,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest]
-        python-version: [3.7, 3.8, 3.9, 3.10]
+        python-version: [3.7, 3.8, 3.9, "3.10"]
 
     steps:
 
@@ -50,7 +50,7 @@ jobs:
           python -m coverage run -m pytest --cov=ncbimeta --cov-report=xml test/test_errors.py test/test_utilities.py test/test_ncbimeta.py test/test_annotate.py test/test_join.py test/test_export.py
 
       - name: Codecov Upload
-        if: matrix.python-version == '3.6' && matrix.os == 'ubuntu-latest'
+        if: matrix.python-version == '3.7' && matrix.os == 'ubuntu-latest'
         uses: codecov/codecov-action@v1
         with:
           file: ./coverage.xml
