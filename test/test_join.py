@@ -52,7 +52,7 @@ def test_join_run():
 
 
 def test_multi_match():
-    """ The ability to properly concatenate multiple matches"""
+    """The ability to properly concatenate multiple matches"""
     # Use the test database
     test_db = os.path.join(os.path.dirname(os.path.abspath(__file__)), "test.sqlite")
     # If the test_db doesn't alread exist, run the test cmd from test_ncbimeta

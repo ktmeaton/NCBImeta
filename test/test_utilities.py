@@ -240,7 +240,7 @@ def test_adv_xml_search_rel():
 
 
 def test_adv_xml_search_attr():
-    """Test advanced xml searching, label conditional (PR #9) """
+    """Test advanced xml searching, label conditional (PR #9)"""
     # Atpical xml indent here is to avoid extra long linese
     test_xml = """
     <Links>
