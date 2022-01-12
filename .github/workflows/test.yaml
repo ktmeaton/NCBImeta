@@ -47,7 +47,7 @@ jobs:
 
       - name: PyTest Modules
         run: |
-          python -m coverage run -m pytest --cov=ncbimeta --cov-report=xml test/test_errors.py test/test_utilities.py test/test_ncbimeta.py test/test_annotate.py test/test_join.py test/test_export.py
+          python test/test.py
 
       - name: Codecov Upload
         if: matrix.python-version == '3.7' && matrix.os == 'ubuntu-latest'

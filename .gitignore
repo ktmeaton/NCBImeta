@@ -24,3 +24,5 @@ example/yersinia*
 *.bak
 database/
 NCBImeta.egg-info
+.vscode/
+*.dtd
