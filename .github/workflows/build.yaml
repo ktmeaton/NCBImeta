@@ -96,5 +96,5 @@ jobs:
       - name: Install From Conda
         shell: bash -l {0}
         run: |
-          mamba install -c conda-forge -c bioconda ncbimeta
+          mamba create -c conda-forge -c bioconda -n ncbimeta ncbimeta
           NCBImeta --version
