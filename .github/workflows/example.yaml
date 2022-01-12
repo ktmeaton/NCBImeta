@@ -117,7 +117,9 @@ jobs:
           NCBImeta --version
 
       - name: Quick Start Example
+        shell: bash -l {0}
         run: |
+          conda activate ncbimeta
           NCBImeta --flat --config test/test.yaml --force-pause-seconds 0 --email ${{ secrets.NCBI_EMAIL }} --api ${{ secrets.NCBI_API_KEY }}
           NCBImetaAnnotate --database test/test.sqlite --annotfile test/test_annot.txt --table BioSample
           NCBImetaAnnotate --database test/test.sqlite --annotfile test/test_annot.txt --table BioSample --concatenate
