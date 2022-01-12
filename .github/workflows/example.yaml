@@ -114,6 +114,7 @@ jobs:
         shell: bash -l {0}
         run: |
           mamba create -c conda-forge -c bioconda -n ncbimeta ncbimeta
+          conda activate ncbimeta
           NCBImeta --version
 
       - name: Quick Start Example
