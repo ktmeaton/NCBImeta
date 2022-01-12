@@ -465,7 +465,29 @@ def UpdateDB(
         with tempfile.NamedTemporaryFile(delete=False) as temp_b:
             # Write the data from ID_handle to a temporary file (binary)
             for line in ID_handle:
-                temp_b.write(str.encode(line))
+
+                # Issue 13: TypeError: descriptor 'encode' requires a 'str'
+                # object but received a 'bytes'
+                # https://github.com/ktmeaton/NCBImeta/issues/13
+
+                # In biopython>=1.77, the type will be bytes
+                # <class 'bytes'>
+                # b'<?xml version="1.0" encoding="UTF-8" ?>\n'
+
+                if type(line) == bytes:
+                    temp_b.write(line)
+
+                # In biopython<1.77, the type will be str
+                # <class 'str'>
+                # <?xml version="1.0" encoding="UTF-8" ?>
+
+                elif type(line) == str:
+                    temp_b.write(str.encode(line))
+
+                # Who knows what the future holds? Be prepared
+                else:
+                    raise NCBImetaErrors.ErrorUnhandledType(line)
+
             temp_b.close()
             # Read the data as binary, into the XML parser. Avoids encoding issues
             with open(temp_b.name, "rb") as xml_source:

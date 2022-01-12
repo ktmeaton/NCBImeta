@@ -290,3 +290,22 @@ class ErrorXPathQueryMissing(Exception):
             + "but no query was supplied: "
             + str(self.value)
         )
+
+
+class ErrorUnhandledType(Exception):
+    def __init__(self, value):
+        """
+        The constructor for ErrorUnhandledType class.
+
+        Parameters:
+        value (str): The variable with an unhandled type.
+        """
+        self.value = value
+
+    def __str__(self):
+        """When the error is raised, print the problematic variable."""
+        return (
+            "\n\nThe following variable has an unhandled type."
+            + "\n\ttype: {type}".format(type=type(self.value))
+            + "\n\tcontent: {content}".format(content=self.value)
+        )
