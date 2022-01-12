@@ -31,7 +31,15 @@ There are three installation options for NCBImeta:
 `mamba` is strongly recommended over `conda`!
 
 ```bash
+conda create -c bioconda -c conda-forge -n ncbimeta ncbimeta
+conda activate ncbimeta
+```
+
+If you have install issues, please use:
+
+```bash
 conda env create -f environment.yaml
+conda activate ncbimeta
 ```
 
 ### 2. PyPI

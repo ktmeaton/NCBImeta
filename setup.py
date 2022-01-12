@@ -13,7 +13,7 @@ setuptools.setup(
         "Efficient and comprehensive metadata acquisition "
         "from the NCBI databases (includes SRA)."
     ),
-    python_requires=">=3.7",
+    python_requires=">=3.7,<=3.10",
     license="MIT",
     long_description=long_description,
     long_description_content_type="text/markdown",
