@@ -72,3 +72,4 @@ jobs:
         with:
           name: ncbimeta-${{ matrix.os }}
           path: dist/
+          retention-days: 7
