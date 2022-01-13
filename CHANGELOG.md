@@ -2,9 +2,54 @@
 
 ## Development
 
+### Commits
+
+## v0.8.3
+
 ### Notes
 
+1. Drop support for `Python 3.7`.
+1. Test support for `Python 3.10` (conda `numpy` isn't ready).
+1. Implement `str` enconding changes that accomdate all versions of `biopython` (>=1.74).
+1. Consolidate `pytest` and `pycov` command to `test/test.py`.
+1. `Build` and `Example` workflow include more comprehensive tests for `conda`.
+1. Create a fallback conda environment for installation (`environment.yaml`).
+1. Applied a hotfix for problematic packaging of `lxml` in `conda`.
+
 ### Commits
+
+* [```a3bb443c```](https://github.com/ktmeaton/NCBImeta/commit/a3bb443c) update pre-commit dependencies
+* [```e5d6420b```](https://github.com/ktmeaton/NCBImeta/commit/e5d6420b) change v0.8.3dev to v0.8.3
+* [```1d45f5bb```](https://github.com/ktmeaton/NCBImeta/commit/1d45f5bb) update recent projects in README
+* [```b0fab147```](https://github.com/ktmeaton/NCBImeta/commit/b0fab147) update paths to docs
+* [```22d7f0f7```](https://github.com/ktmeaton/NCBImeta/commit/22d7f0f7) update notes for v0.8.3
+* [```30bc84e3```](https://github.com/ktmeaton/NCBImeta/commit/30bc84e3) add lxml hotfix to build
+* [```3d1e7040```](https://github.com/ktmeaton/NCBImeta/commit/3d1e7040) restore gcc to environment
+* [```6f4b3f9c```](https://github.com/ktmeaton/NCBImeta/commit/6f4b3f9c) update install documentation
+* [```560b8175```](https://github.com/ktmeaton/NCBImeta/commit/560b8175) add auto yes to pip uninstall
+* [```9087056e```](https://github.com/ktmeaton/NCBImeta/commit/9087056e) remove python 3.10, try lxml hotfix
+* [```f892e9b9```](https://github.com/ktmeaton/NCBImeta/commit/f892e9b9) fix missing activate
+* [```c003f02a```](https://github.com/ktmeaton/NCBImeta/commit/c003f02a) update development docs
+* [```9b5c819e```](https://github.com/ktmeaton/NCBImeta/commit/9b5c819e) create named conda environment
+* [```de731fef```](https://github.com/ktmeaton/NCBImeta/commit/de731fef) fix missing conda activate
+* [```6d3e91fc```](https://github.com/ktmeaton/NCBImeta/commit/6d3e91fc) try to run example from conda using different python versions
+* [```636931dd```](https://github.com/ktmeaton/NCBImeta/commit/636931dd) try to install from conda using different python versions
+* [```2c9e2c62```](https://github.com/ktmeaton/NCBImeta/commit/2c9e2c62) restrict workflows py 3.10 version to 3.10.1
+* [```b970d73a```](https://github.com/ktmeaton/NCBImeta/commit/b970d73a) simplify calls to pytest and pycov
+* [```ececd98c```](https://github.com/ktmeaton/NCBImeta/commit/ececd98c) implement functionality for different biopython versions
+* [```88061b34```](https://github.com/ktmeaton/NCBImeta/commit/88061b34) specify python 3.10.1 is supported
+* [```0acf7a5f```](https://github.com/ktmeaton/NCBImeta/commit/0acf7a5f) relax biopython dependencies to allow most recent package
+* [```1abff891```](https://github.com/ktmeaton/NCBImeta/commit/1abff891) delete old annotate replace file
+* [```42907aa9```](https://github.com/ktmeaton/NCBImeta/commit/42907aa9) lint test files
+* [```801614df```](https://github.com/ktmeaton/NCBImeta/commit/801614df) try putting 3.10 in quotes
+* [```709a8817```](https://github.com/ktmeaton/NCBImeta/commit/709a8817) add a full environment for conda install
+* [```11024c4c```](https://github.com/ktmeaton/NCBImeta/commit/11024c4c) drop 3.6 add 3.10 in CI
+* [```47dd5849```](https://github.com/ktmeaton/NCBImeta/commit/47dd5849) add a stock environment for dev
+* [```0828d35e```](https://github.com/ktmeaton/NCBImeta/commit/0828d35e) relax dependencies
+* [```d93afb2b```](https://github.com/ktmeaton/NCBImeta/commit/d93afb2b) enable debugging mode
+* [```b9f0afdb```](https://github.com/ktmeaton/NCBImeta/commit/b9f0afdb) update sars-cov-2 search term
+* [```8ff08d70```](https://github.com/ktmeaton/NCBImeta/commit/8ff08d70) update README with v0.8.2 project as released
+* [```f81e8184```](https://github.com/ktmeaton/NCBImeta/commit/f81e8184) note conda install issue
 
 ## v0.8.2
 
@@ -17,6 +62,7 @@
 
 ### Commits
 
+* [```089858ee```](https://github.com/ktmeaton/NCBImeta/commit/089858ee) include notes in CHANGELOG
 * [```c1a4b2a1```](https://github.com/ktmeaton/NCBImeta/commit/c1a4b2a1) update notes
 * [```aed461b8```](https://github.com/ktmeaton/NCBImeta/commit/aed461b8) update CHANGELOG
 * [```d040d1ce```](https://github.com/ktmeaton/NCBImeta/commit/d040d1ce) update README and CHANGELOG
