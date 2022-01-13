@@ -175,9 +175,9 @@ Example database output (a subset of the BioSample table)
 
 ## Recent and Upcoming Features
 
-- Project v0.8.1 - "Python 3.9 Support": Add Support for Python 3.9 - RELEASED
-- [Project v0.8.2 - "Annotate Simplicity"](https://github.com/ktmeaton/NCBImeta/projects/12): Simplify the Annotate Command - RELEASED
 - [Project "Read The Docs"](https://github.com/ktmeaton/NCBImeta/projects/7): Documentation Overhaul - PLANNED
+- [Project v0.8.3 - "Update Dependencies"](https://github.com/ktmeaton/NCBImeta/projects/13): Bugfixes for Installation - DEVELOPMENT
+- [Project v0.8.2 - "Annotate Simplicity"](https://github.com/ktmeaton/NCBImeta/projects/12): Simplify the Annotate Command - RELEASED
 
 ## Documentation
 
