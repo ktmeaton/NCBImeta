@@ -5,10 +5,7 @@ channels:
   - anaconda
   - defaults
 dependencies:
-  - python=3.8
+  - python>=3.7,<3.10
   - pip
-  - anaconda::make
-  - anaconda::gcc_impl_linux-64
-  - anaconda::gcc_linux-64
-  - anaconda::gxx_linux-64
-  - ncbimeta
+  - pip:
+    - ncbimeta
