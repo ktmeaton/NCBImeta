@@ -121,7 +121,7 @@ jobs:
         shell: bash -l {0}
         run: |
           conda activate ncbimeta
-          pip uninstall lxml
+          pip uninstall --yes lxml
           pip install lxml
 
       - name: Quick Start Example

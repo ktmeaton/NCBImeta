@@ -26,16 +26,9 @@ NCBImeta is a command-line application that retrieves and organizes metadata fro
 
 There are three installation options for NCBImeta:
 
-### 1. Conda
+### 1. Conda\*
 
-`mamba` is strongly recommended over `conda`!
-
-```bash
-conda create -c bioconda -c conda-forge -n ncbimeta ncbimeta
-conda activate ncbimeta
-```
-
-If you have install issues, please use:
+> \* `mamba` is strongly recommended over `conda`!
 
 ```bash
 conda env create -f environment.yaml
