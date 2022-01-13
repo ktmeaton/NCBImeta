@@ -39,6 +39,7 @@ setuptools.setup(
             "flake8",
             "flake8-bugbear",
             "black",
+            "pyinstaller",
         ]
     },
     scripts=[
