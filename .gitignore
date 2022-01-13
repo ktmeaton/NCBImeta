@@ -26,4 +26,4 @@ database/
 NCBImeta.egg-info
 .vscode/
 *.dtd
-NCBImeta.spec
+*.spec

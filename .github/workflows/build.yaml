@@ -47,11 +47,29 @@ jobs:
           NCBImeta --version
           pyinstaller --version
 
-      - name: Build Binary
+      - name: Build NCBImeta
         run: |
           pyinstaller ncbimeta/NCBImeta
           dist/NCBImeta/NCBImeta --version
-          tar -czvf ncbimeta-${{ matrix.os }}.tar.gz dist/NCBImeta/NCBImeta
+
+      - name: Build NCBImetaAnnotate
+        run: |
+          pyinstaller ncbimeta/NCBImetaAnnotate
+          dist/NCBImetaAnnotate/NCBImetaAnnotate --version
+
+      - name: Build NCBImetaJoin
+        run: |
+          pyinstaller ncbimeta/NCBImetaJoin
+          dist/NCBImetaJoin/NCBImetaJoin --version
+
+      - name: Build NCBImetaExport
+        run: |
+          pyinstaller ncbimeta/NCBImetaExport
+          dist/NCBImetaExport/NCBImetaExport --version
+
+      - name: Archive Binaries
+        run: |
+          tar -czvf ncbimeta-${{ matrix.os }}.tar.gz dist/
 
       - name: Upload Binary
         uses: actions/upload-artifact@v2

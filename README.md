@@ -30,7 +30,7 @@ NCBImeta is a command-line application that retrieves and organizes metadata fro
 
 ## Installation
 
-There are three installation options for NCBImeta:
+There are four installation options for NCBImeta:
 
 ### 1. Conda\*
 
@@ -62,6 +62,13 @@ Test that the installation was successful:
 ```bash
 NCBImeta --version
 ```
+
+### 4. Pre-Compiled Binaries (Coming Soon!)
+
+Download a pre-compiled binary from the [latest release](https://github.com/ktmeaton/NCBImeta/releases).
+
+- [Linux Binary Download](https://github.com/ktmeaton/NCBImeta/archive/refs/tags/nbcimeta-ubuntu-latest.tar.gz)
+- [macOS Binary Download](https://github.com/ktmeaton/NCBImeta/archive/refs/tags/nbcimeta-macos-latest.tar.gz)
 
 ## Command-Line Parameters
 
