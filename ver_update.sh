@@ -10,8 +10,7 @@ NEWVER=$2
 
 FILELIST="setup.py
 	  ncbimeta/NCBImeta
-	  ncbimeta/NCBImetaAnnotateConcatenate
-	  ncbimeta/NCBImetaAnnotateReplace
+	  ncbimeta/NCBImetaAnnotate
 	  ncbimeta/NCBImetaExport
 	  ncbimeta/NCBImetaJoin"
 
