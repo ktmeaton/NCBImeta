@@ -4,14 +4,14 @@ repos:
 
   # black: Python Formatter
   - repo: https://github.com/psf/black
-    rev: main
+    rev: 21.12b0
     hooks:
       - id: black
         #language_version: python3.7
 
   # flake8: Python PEP8 Compliance
   - repo: https://gitlab.com/pycqa/flake8
-    rev: main
+    rev: 3.9.2
     hooks:
     - id: flake8
       additional_dependencies: [
@@ -21,23 +21,23 @@ repos:
 
   # General Text + YAML Lint
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: master
+    rev: v4.1.0
     hooks:
       - id: trailing-whitespace
         args: [--markdown-linebreak-ext=md]
-        exclude: paper/*
+        exclude: ^paper/
       - id: end-of-file-fixer
       - id: check-yaml
       - id: check-added-large-files
         args: ['--maxkb=10000']
       - id: mixed-line-ending
-        exclude: paper/*
+        exclude: ^paper/
         args: [--fix=lf]
       - id: detect-private-key
 
   # Markdown lint
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: master
+    rev: v0.30.0
     hooks:
       - id: markdownlint
         args: [--config=.github/markdown_lint.yaml, --ignore=paper/]
