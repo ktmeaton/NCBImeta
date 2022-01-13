@@ -3,7 +3,7 @@ OUTPUT_DIR : database/mammuthus
 EMAIL : myusername@domain.com
 API_KEY :
 FORCE_PAUSE_SECONDS : 1
-DATABASE : mammuthus_db.sqlite
+DATABASE : mammuthus.sqlite
 
 # NCBI Tables to Query
 TABLES :
@@ -23,46 +23,6 @@ SEARCH_TERMS :
 
 # Columns of the database (ie. metadata fields to retrieve)
 TABLE_COLUMNS :
-
-  - Assembly :
-    - AssemblyAccession : AssemblyAccession
-    - AssemblyBioSampleAccession : BioSampleAccn
-    - AssemblyBioSampleID : BioSampleId
-    - AssemblyGenbankBioprojectAccession : GB_BioProjects, BioprojectAccn
-    - AssemblyGenbankID : GbUid
-    - AssemblyRefseqBioprojectAccession : RS_BioProjects, BioprojectAccn
-    - AssemblyRefSeqCategory : RefSeq_category
-    - AssemblyRefSeqID : RsUid
-    - AssemblyWGSAccession : WGS
-    - AssemblyInfraspecies : InfraspeciesList, Sub_value
-    - AssemblyIsolate : Isolate
-    - AssemblyOrganism : Organism
-    - AssemblySpeciesTaxonomicID : SpeciesTaxid
-    - AssemblySpeciesName : SpeciesName
-    - AssemblyTaxonomicID : Taxid
-    - AssemblyName : AssemblyName
-    - AssemblyStatus : AssemblyStatus
-    - AssemblyType : AssemblyType
-    - AssemblyCoverage : Coverage
-    - AssemblyChromosomes : Meta, Stat, category, chromosome_count
-    - AssemblyContigCount: Meta, Stat, category, contig_count
-    - AssemblyContigN50 : Meta, Stat, category, contig_n50
-    - AssemblyContigL50 : Meta, Stat, category, contig_l50
-    - AssemblyNonChromosomalReplicons : Meta, Stat, category, non_chromosome_replicon_count
-    - AssemblyReplicons : Meta, Stat, category, replicon_count
-    - AssemblyScaffolds : Meta, Stat, category, scaffold_count
-    - AssemblyScaffoldN50 : Meta, Stat, category, scaffold_n50
-    - AssemblyScaffoldL50 : Meta, Stat, category, scaffold_l50
-    - AssemblyTotalLength : Meta, Stat, category, total_length
-    - AssemblyUngappedLength : Meta, Stat, category, ungapped_length
-    - AssemblySubmitterOrganization : SubmitterOrganization
-    - AssemblySubmissionDate : SubmissionDate
-    - AssemblyReleaseDate : SeqReleaseDate
-    - AssemblyFTPAssemblyReport : FtpPath_Assembly_rpt
-    - AssemblyFTPGenbank : FtpPath_GenBank
-    - AssemblyFTPRefSeq : FtpPath_RefSeq
-    - AssemblyFTPStatsReport : FtpPath_Stats_rpt
-    - AssemblyComment : NullValue
 
   - BioSample :
     - BioSampleAccession: BioSample, accession
