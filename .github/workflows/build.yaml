@@ -67,12 +67,8 @@ jobs:
           pyinstaller ncbimeta/NCBImetaExport
           dist/NCBImetaExport/NCBImetaExport --version
 
-      - name: Archive Binaries
-        run: |
-          tar -czvf ncbimeta-${{ matrix.os }}.tar.gz dist/
-
       - name: Upload Binary
         uses: actions/upload-artifact@v2
         with:
           name: ncbimeta-${{ matrix.os }}
-          path: ncbimeta-${{ matrix.os }}.tar.gz
+          path: dist/
