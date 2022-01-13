@@ -27,3 +27,4 @@ NCBImeta.egg-info
 .vscode/
 *.dtd
 *.spec
+bin/
