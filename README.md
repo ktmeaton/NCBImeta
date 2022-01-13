@@ -16,9 +16,15 @@ NCBImeta is a command-line application that retrieves and organizes metadata fro
 
 ## Requirements
 
-* NCBImeta is written in Python 3 and supported on Linux and macOS.
-* Dependencies that will be installed are listed in [requirements.txt](https://github.com/ktmeaton/NCBImeta/blob/master/requirements.txt).
-* [Check all Python versions and OS with verified build status](https://github.com/ktmeaton/NCBImeta/actions?query=workflow%3ABuild+branch%3Amaster)
+- NCBImeta is written in Python 3 and supported on Linux and macOS.
+- Dependencies that will be installed are listed in [requirements.txt](https://github.com/ktmeaton/NCBImeta/blob/master/requirements.txt).
+- Python Versions:
+  - 3.7
+  - 3.8
+  - 3.9
+- Operating Systems:
+  - Ubuntu
+  - macOS
 
 [Conda](https://docs.conda.io/en/latest/miniconda.html) is the recommended installation method. To install with pip, ```gcc``` is required.
 
@@ -35,7 +41,9 @@ conda env create -f environment.yaml
 conda activate ncbimeta
 ```
 
-### 2. PyPI
+### 2. PyPI\*
+
+> \* `gcc` is required.
 
 ```bash
 pip install ncbimeta
@@ -158,18 +166,18 @@ Example database output (a subset of the BioSample table)
 
 ## Currently Supported NCBI Tables
 
-* Assembly
-* BioProject
-* BioSample
-* Nucleotide
-* SRA
-* Pubmed
+- Assembly
+- BioProject
+- BioSample
+- Nucleotide
+- SRA
+- Pubmed
 
 ## Recent and Upcoming Features
 
-* Project v0.8.1 - "Python 3.9 Support": Add Support for Python 3.9 - RELEASED
-* [Project v0.8.2 - "Annotate Simplicity"](https://github.com/ktmeaton/NCBImeta/projects/12): Simplify the Annotate Command - RELEASED
-* [Project "Read The Docs"](https://github.com/ktmeaton/NCBImeta/projects/7): Documentation Overhaul - PLANNED
+- Project v0.8.1 - "Python 3.9 Support": Add Support for Python 3.9 - RELEASED
+- [Project v0.8.2 - "Annotate Simplicity"](https://github.com/ktmeaton/NCBImeta/projects/12): Simplify the Annotate Command - RELEASED
+- [Project "Read The Docs"](https://github.com/ktmeaton/NCBImeta/projects/7): Documentation Overhaul - PLANNED
 
 ## Documentation
 
@@ -203,9 +211,9 @@ Author: [Katherine Eaton](https://github.com/ktmeaton) (ktmeaton@gmail.com)
 
 Those who have filed issues, pull-requests, and participated in discussions.
 
-* [Andreas Sjödin](https://github.com/druvus)
-* [hmontenegro](https://github.com/hmontenegro)
-* [Matthew Gopez](https://github.com/hellothisisMatt)
-* [Philip Mabon](https://github.com/Takadonet)
+- [Andreas Sjödin](https://github.com/druvus)
+- [hmontenegro](https://github.com/hmontenegro)
+- [Matthew Gopez](https://github.com/hellothisisMatt)
+- [Philip Mabon](https://github.com/Takadonet)
 
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
