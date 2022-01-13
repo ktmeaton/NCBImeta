@@ -99,3 +99,10 @@ jobs:
           mamba create -c conda-forge -c bioconda -n ncbimeta ncbimeta
           conda activate ncbimeta
           NCBImeta --version
+
+      - name: lxml Hotfix
+        shell: bash -l {0}
+        run: |
+          conda activate ncbimeta
+          pip uninstall --yes lxml
+          pip install lxml
