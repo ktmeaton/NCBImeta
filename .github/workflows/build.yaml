@@ -56,5 +56,5 @@ jobs:
       - name: Upload Binary
         uses: actions/upload-artifact@v2
         with:
-          name: ncbimeta-${{ matrix.python-version }}
-          path: ncbimeta-${{ matrix.python-version }}.tar.gz
+          name: ncbimeta-${{ matrix.os }}
+          path: ncbimeta-${{ matrix.os }}.tar.gz
