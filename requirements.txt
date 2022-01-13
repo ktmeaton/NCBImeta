@@ -1,4 +1,4 @@
 biopython>=1.74
 lxml>=4.6.3
 PyYAML>=5.4
-numpy
+numpy<1.22.0
