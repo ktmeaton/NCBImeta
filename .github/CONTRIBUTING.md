@@ -43,7 +43,7 @@
 
 1. **Implement your changes/features.**
 
-1. **Update the relevant documentation, ex. the [Config](https://github.com/ktmeaton/NCBImeta/blob/master/config/README_config.md) and [Schema](https://github.com/ktmeaton/NCBImeta/blob/master/schema/README_schema.md) docs.**
+1. **Update the relevant documentation, ex. the [Config](https://github.com/ktmeaton/NCBImeta/blob/master/docs/config.md) and [Schema](https://github.com/ktmeaton/NCBImeta/blob/master/docs/schema.md) docs.**
 
 1. **Run the test suite, and add new tests if relevant.**
 

@@ -105,7 +105,7 @@ Download a selection of genomic metadata pertaining to the plague pathogen *Yers
 NCBImeta --flat --config test/test.yaml
 ```
 
-(Note: The 'quick' start config file forces slow downloads to accommodate users with slow internet. For faster record retrieval, please see the [Config File README](https://github.com/ktmeaton/NCBImeta/blob/master/config/README_config.md) to start editing config files.)
+(Note: The 'quick' start config file forces slow downloads to accommodate users with slow internet. For faster record retrieval, please see the [config file docs](https://github.com/ktmeaton/NCBImeta/blob/master/docs/config.md) to start editing config files.)
 
 Example output of the command-line interface (v0.6.1):
 [![asciicast](https://asciinema.org/a/289560.svg)](https://asciinema.org/a/289560)
@@ -183,8 +183,8 @@ Example database output (a subset of the BioSample table)
 
 To get started with customizing the search terms, database, and metadata fields, please read:
 
-1. [Config File README](https://github.com/ktmeaton/NCBImeta/blob/master/config/README_config.md)
-2. [Schema File README](https://github.com/ktmeaton/NCBImeta/blob/master/schema/README_schema.md)
+1. [Config File Docs](https://github.com/ktmeaton/NCBImeta/blob/master/docs/config.md)
+2. [Schema File Docs](https://github.com/ktmeaton/NCBImeta/blob/master/schema/schema.md)
 
 ## Issues, Questions, and Suggestions
 

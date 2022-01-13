@@ -1,5 +1,5 @@
 # This is the database schema for NCBI BioSample
-# To customize, consult README_schema.md
+# To customize, consult docs/schema.md
 # https://www-ncbi-nlm-nih-gov.libaccess.lib.mcmaster.ca/biosample/docs/attributes/
 
 # Keyword Tips

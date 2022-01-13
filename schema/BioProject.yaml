@@ -1,5 +1,5 @@
 # This is the database schema for NCBI BioProject
-# To customize, consult README_schema.md
+# To customize, consult docs/schema.md
 
 # Keyword Tips
 # Only records used by SRA:
